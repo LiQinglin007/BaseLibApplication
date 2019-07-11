@@ -1,0 +1,43 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--1）.alaways:这个值会使菜单项一直显示在ActionBar上。-->
+    <!--2）.ifRoom:如果有足够的空间,这个值会使菜单显示在ActionBar上。-->
+    <!--3）.never:这个值菜单永远不会出现在ActionBar是。-->
+    <!--4）.withText:这个值使菜单和它的图标，菜单文本一起显示。-->
+
+    <!--actionbar里每个item的优先级，可以用来排顺序，值越大优先级越低，actionbar地方不够就会放到overflow中-->
+    <item
+        android:id="@+id/toolbar_but1"
+        android:icon="@drawable/icon_sreach"
+        android:orderInCategory="200"
+        android:title="搜索"
+        app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/toolbar_but4"
+        android:icon="@drawable/icon_share"
+        android:orderInCategory="100"
+        android:title="分享"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/toolbar_but2"
+        android:icon="@drawable/icon_share"
+        android:title="BehaviorTestActivity"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/toolbar_but3"
+        android:icon="@drawable/icon_share"
+        android:title="TabLayoutActivity"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+    <item
+        android:id="@+id/toolbar_but5"
+        android:icon="@drawable/icon_share"
+        android:title="CoordinatorLayoutActivity"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+</menu>

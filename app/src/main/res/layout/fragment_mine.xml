@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_300"
+        android:background="@color/default_color"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_scrollFlags="scroll">
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/mine_take_pic_sw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="@dimen/px_30"
+            android:layout_marginTop="@dimen/px_15"
+            android:paddingRight="@dimen/px_25"
+            android:text="裁剪？"
+            android:textColor="@color/color_white" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/mine_take_pic"
+            android:layout_width="@dimen/px_150"
+            android:layout_height="@dimen/px_150"
+            android:src="@drawable/headview" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px_20"
+            android:text="小米(点击上边的图片)"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/px_30" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_10"
+                android:background="@color/color_white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/mine_choosetime"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/px_80"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/px_24"
+                    android:paddingRight="@dimen/px_24"
+                    android:text="选择时间" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/mine_choosetime_sw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/px_30"
+                    android:layout_marginRight="@dimen/px_24"
+                    android:gravity="center_vertical"
+                    android:text="今天以后？" />
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <include layout="@layout/include_line"></include>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mine_choose_time_min"
+                style="@style/fragment_mine_tv"
+                android:text="选择时间(几点几分)" />
+
+            <include layout="@layout/include_line"></include>
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mine_choose_time_didi"
+                style="@style/fragment_mine_tv"
+                android:text="预约时间(仿滴滴预约)" />
+
+            <include layout="@layout/include_line"></include>
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mine_choosesex"
+                style="@style/fragment_mine_tv"
+                android:text="选择性别" />
+
+            <include layout="@layout/include_line"></include>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mine_design_ui"
+                style="@style/fragment_mine_tv"
+                android:text="Design包下的UI篇" />
+
+            <include layout="@layout/include_line"></include>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mine_bottom_list"
+                style="@style/fragment_mine_tv"
+                android:text="底部弹出list单选(选择notice)" />
+
+            <include layout="@layout/include_line"></include>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mine_bottom_userlist"
+                style="@style/fragment_mine_tv"
+                android:text="底部弹出list多选(选择user)" />
+
+            <include layout="@layout/include_line"></include>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mine_notice"
+                style="@style/fragment_mine_tv"
+                android:text="通知栏" />
+
+            <include layout="@layout/include_line"></include>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mine_choose_pic"
+                style="@style/fragment_mine_tv"
+                android:text="发个朋友圈" />
+
+            <include layout="@layout/include_line"></include>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mine_http"
+                style="@style/fragment_mine_tv"
+                android:text="Http请求框架" />
+
+            <include layout="@layout/include_line"></include>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mine_sing_out"
+                style="@style/fragment_mine_tv"
+                android:text="退出程序" />
+
+            <include layout="@layout/include_line"></include>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mine_switch_fragment"
+                style="@style/fragment_mine_tv"
+                android:text="切换fragment" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

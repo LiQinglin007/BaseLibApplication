@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <!--主页广告小喇叭-->
+    <dimen name="vertical_view_group_height">20dp</dimen>
+    <dimen name="vertical_view_group_double_height">70dp</dimen>
+    <dimen name="vertical_view_group_width">300dp</dimen>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="default_color">#037BFF</color>
+    <color name="color_333">#333</color>
+    <color name="color_666">#666</color>
+    <color name="color_white">#fff</color>
+    <color name="color_999">#999</color>
+    <color name="color_51D8BA">#51D8BA</color>
+    <color name="color_51D8BA_0x">#FF51D8BA</color>
+    <color name="window_background">#FFF5F5F5</color>
+    <color name="color_0b0b0b">#0b0b0b</color>
+    <color name="color_4e4e4e">#4e4e4e</color>
+    <color name="color_e0e0e0">#e0e0e0</color>
+    <color name="color_transparent">#00000000</color>
+    <color name="actionsheet_blue">#037BFF</color>
+
+    <!--自定义DialChartView-->
+    <color name="dialchart_pointer">#E88A38</color>
+    <color name="warning_color1">#5ED720</color>
+    <color name="warning_color2">#2848FD</color>
+    <color name="warning_color3">#FEC514</color>
+    <color name="warning_color4">#FF5200</color>
+    <color name="warning_color5">#C02827</color>
+</resources>

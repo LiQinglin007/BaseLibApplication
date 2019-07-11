@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<resources>-->
+    <!--<paths>-->
+        <!--<external-path path="Android/data/com.example/lql/smarthomehome/" name="files_root"></external-path>-->
+        <!--<external-path path="." name="external_storage_root"></external-path>-->
+    <!--</paths>-->
+<!--</resources>-->
+<resource xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--Context.getFilesDir()-->
+    <!--<files-path path="." name="images"/>-->
+
+    <!--Environment.getExternalStorageDirectory().-->
+    <external-path
+        name="images"
+        path="" />
+    <!--path是你需要分享的相对子目录。设置空就表示将整个SD卡进行共享-->
+    <!--name是别名，用来在Uri中替换具体的path, 无所谓的-->
+
+    <!--getCacheDir()-->
+    <!--<cache-path path="." name="images"/>-->
+</resource>

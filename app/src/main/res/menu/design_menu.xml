@@ -1,0 +1,38 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--这个分组里边有一个小标题-->
+    <item android:title="Basic">
+        <menu>
+            <item
+                android:id="@+id/design_menu_item1"
+                android:icon="@mipmap/ic_launcher"
+                android:title="得分"></item>
+
+            <item
+                android:id="@+id/design_menu_item2"
+                android:icon="@mipmap/ic_launcher_round"
+                android:title="助攻"></item>
+        </menu>
+    </item>
+
+
+    <!--使用group会有一个分割线-->
+    <group android:id="@+id/design_menu_group1">
+
+        <item
+            android:id="@+id/design_menu_item3"
+            android:icon="@mipmap/ic_launcher"
+            android:title="篮板"></item>
+
+        <item
+            android:id="@+id/design_menu_item4"
+            android:icon="@mipmap/ic_launcher_round"
+            android:title="抢断"></item>
+    </group>
+
+    <item
+        android:id="@+id/design_menu_item5"
+        android:icon="@drawable/headview"
+        android:title="失误"></item>
+
+</menu>

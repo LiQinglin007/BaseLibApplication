@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lLayout_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/back_white_stroke"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
+
+        android:layout_height="@dimen/px_96"
+        android:gravity="center|fill_vertical"
+        android:text="提示"
+        android:textColor="@color/color_0b0b0b"
+        android:textSize="@dimen/px_36" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/dialog_edit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_80"
+        android:layout_marginLeft="@dimen/px_28"
+        android:layout_marginTop="@dimen/px_40"
+        android:layout_marginRight="@dimen/px_28"
+        android:layout_marginBottom="@dimen/px_40"
+        android:gravity="center|fill"
+        android:background="@drawable/back_btu_hint"
+        android:hint=""
+        android:maxLength="15"
+        android:paddingLeft="@dimen/px_24"
+        android:paddingRight="@dimen/px_24"
+        android:textColorHint="@color/color_4e4e4e"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textSize="@dimen/px_28" />
+
+
+    <include layout="@layout/include_line"></include>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/message_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px_28"
+        android:layout_marginTop="@dimen/px_40"
+        android:layout_marginRight="@dimen/px_28"
+        android:layout_marginBottom="@dimen/px_40"
+        android:gravity="center|fill_vertical"
+        android:paddingLeft="@dimen/px_24"
+
+        android:paddingRight="@dimen/px_24"
+        android:text="消息"
+        android:textColor="@color/color_0b0b0b"
+        android:textColorHint="@color/color_4e4e4e"
+        android:textSize="@dimen/px_28" />
+
+    <include
+        android:id="@+id/line_ly"
+        layout="@layout/include_line"></include>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_112"
+        android:orientation="horizontal">
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/dialog_cannle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center|fill_vertical"
+            android:text="取消"
+            android:textColor="@color/color_0b0b0b"
+            android:textSize="@dimen/px_32" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/img_line"
+            android:layout_width="@dimen/px_1"
+            android:layout_height="match_parent"
+            android:background="@color/color_e0e0e0" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/dialog_ok"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center|fill_vertical"
+            android:text="确定"
+            android:textColor="@color/color_0b0b0b"
+            android:textSize="@dimen/px_32" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+
+</android.support.v7.widget.LinearLayoutCompat>

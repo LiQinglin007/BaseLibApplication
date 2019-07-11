@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/px_80"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/px_40"
+    android:paddingRight="@dimen/px_40">
+
+    <TextView
+        android:id="@+id/item_player_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical" />
+
+</LinearLayout>

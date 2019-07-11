@@ -1,0 +1,5 @@
+<!--edittext 光标的颜色和粗细-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:width="1dp" />
+    <solid android:color="@color/default_color" />
+</shape>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="LoadingDialog" parent="@android:style/Theme.Dialog">
+        <!--去掉边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--悬浮-->
+        <item name="android:windowIsFloating">true</item>
+        <!--不需要完全透明-->
+        <item name="android:windowIsTranslucent">false</item>
+        <!--背景颜色-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--不需要标题-->
+        <item name="android:windowNoTitle">true</item>
+        <!--充满全屏幕-->
+        <item name="android:windowFullscreen">true</item>
+        <!-- Dialog以外的区域模糊效果-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <!-- ActionSheet进出动画 -->
+    <style name="ActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/actionsheet_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/actionsheet_dialog_out</item>
+    </style>
+
+
+    <style name="myTextAppearanceButton" parent="TextAppearance.AppCompat.Widget.Button">
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="MiAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--取消字母全部大写-->
+        <item name="android:textAppearanceButton">@style/myTextAppearanceButton</item>
+        <!--不要标题-->
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+</resources>

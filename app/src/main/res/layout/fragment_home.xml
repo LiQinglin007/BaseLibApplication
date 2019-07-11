@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.li.xiaomi.xiaomilibtest.ui.main.MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="当前页内容不是依赖库中的内容"
+        android:textSize="@dimen/px_36" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/homeFragmentLy">
+
+                <Button
+                    android:id="@+id/home_chart"
+                    style="@style/homeFragmentButton"
+                    android:text="MPAndroidChart" />
+
+                <Button
+                    android:id="@+id/home_launcher"
+                    style="@style/homeFragmentButton"
+                    android:text="桌面消息数" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/homeFragmentLy">
+
+                <Button
+                    android:id="@+id/home_recycler"
+                    style="@style/homeFragmentButton"
+                    android:text="多层列表" />
+
+                <Button
+                    android:id="@+id/home_pdf"
+                    style="@style/homeFragmentButton"
+                    android:text="在线预览pdf文件" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/homeFragmentLy">
+
+                <Button
+                    android:id="@+id/home_json"
+                    style="@style/homeFragmentButton"
+                    android:text="无限层JSON" />
+
+                <Button
+                    android:id="@+id/home_tcp_client"
+                    style="@style/homeFragmentButton"
+                    android:text="Tcp-Client" />
+
+                <Button
+                    android:id="@+id/home_tcp_server"
+                    style="@style/homeFragmentButton"
+                    android:text="Tcp-Server" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/homeFragmentLy">
+
+                <Button
+                    android:id="@+id/home_wifi"
+                    style="@style/homeFragmentButton"
+                    android:text="自动加入指定wifi" />
+
+                <Button
+                    android:id="@+id/home_jsonarray_to_object_array"
+                    style="@style/homeFragmentButton"
+                    android:text="JsonArrayToObject" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/homeFragmentLy">>
+
+                <Button
+                    android:id="@+id/home_viewpage"
+                    style="@style/homeFragmentButton"
+                    android:text="viewpage" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">BaseLib</string>
+    <!--约束输入的字符串-->
+    <string name="rule_password">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <!--字符类型-->
+    <string name="rule_all">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`¬!"£$%^*()~=#{}[];':,./?/*-_+&#060;&#062;&#064;&#038;</string>
+    <!--金额-->
+    <string name="digits_money">0123456789.</string>
+
+    <!--创建对话框-->
+    <string name="loading_string">加载中...</string>
+    <!--链接失败-->
+    <string name="http_onFailure">服务器开小差了</string>
+    <!--服务器异常-->
+    <string name="http_ServiceError">服务器开小差了</string>
+    <!--数据解析错误-->
+    <string name="http_AnalysisError">服务器开小差了</string>
+    <!--没有网络了-->
+    <string name="http_NoNetWorkError">亲，请检查网络</string>
+
+    <string name="choose_from_camera_text">拍照</string>
+    <string name="choose_from_phone_text">从手机相册选择</string>
+    <string name="cancel">取消</string>
+    <string name="submit">确定</string>
+
+    <!--一些权限的字段-->
+    <string name="permission_read_write_storage">读写手机存储</string>
+    <string name="permission_read_write_storage_de">当前功能需要读写手机存储权限</string>
+    <string name="permission_camera">相机、读写手机存储</string>
+    <string name="permission_camera_de">当前功能需要相机、读写手机存储权限</string>
+    <string name="permission_location">定位</string>
+    <string name="permission_location_de">当前功能需要定位权限</string>
+</resources>

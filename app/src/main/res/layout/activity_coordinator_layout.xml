@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/coordinator_app_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!--app:expandedTitleMarginStart="20dp" 图片展开时，title距离左边的距离-->
+        <!--app:contentScrim="@color/warning_color3"  展开和收缩时的渐变颜色-->
+        <!--“pin”：固定模式，在折叠的时候最后固定在顶端；-->
+        <!--“parallax”：视差模式，在折叠的时候会有个视差折叠的效果。-->
+        <!--我们可以在布局中使用属性app:layout_collapseMode=”parallax”来改变-->
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/coordinator_collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/warning_color3"
+            app:expandedTitleMarginStart="150dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher_round"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.6" />
+            <!--layout_collapseParallaxMultiplier：滑动时的视觉差  [0.0-1.0]-->
+            <!--app:layout_collapseMode="pin":固定模式，这个属性是在滚动的时候，
+            最终在屏幕顶端固定的view，该view不会滑出屏幕，会被固定在顶端。-->
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/coordinator_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/coordinator_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"></android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/coordinator_floating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/px_32"
+        android:src="@mipmap/ic_launcher_round"
+        app:layout_anchor="@id/coordinator_app_layout"
+        app:layout_anchorGravity="right|bottom">
+
+    </android.support.design.widget.FloatingActionButton>
+
+
+</android.support.design.widget.CoordinatorLayout>
+
+

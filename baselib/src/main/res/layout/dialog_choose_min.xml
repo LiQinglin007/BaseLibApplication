@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/dialog_choose_time_cancel"
+            android:layout_width="@dimen/px_120"
+            android:layout_height="@dimen/px_64"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textSize="@dimen/px_30" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/dialog_choose_time_submit"
+            android:layout_width="@dimen/px_120"
+            android:layout_height="@dimen/px_64"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="@string/submit"
+            android:textColor="@color/default_color"
+            android:textSize="@dimen/px_30" />
+    </RelativeLayout>
+
+    <include layout="@layout/include_line"></include>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.wx.wheelview.widget.WheelView
+            android:id="@+id/dialog_choose_time_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.wx.wheelview.widget.WheelView
+            android:id="@+id/dialog_choose_time_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</android.support.v7.widget.LinearLayoutCompat>
