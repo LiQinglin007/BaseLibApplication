@@ -3,11 +3,13 @@ package com.lixiaomi.baselib.ui.chooseDateUtils;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.lixiaomi.baselib.R;
 import com.lixiaomi.baselib.utils.MiDateUtils;
@@ -69,6 +71,7 @@ public class MiDayTime {
 
     public final static int YEAR_MONTH_DAY = 0x22;
     public final static int YEAR_MONTH = 0x23;
+    public final static int YEAR = 0x24;
 
     private static int mTvColor = R.color.default_color;
     private static Context mContext;
@@ -76,6 +79,7 @@ public class MiDayTime {
     private static Dialog mDialog;
     private static TimeDialogCallBack mTimeDialogCallBack;
 
+    private static WheelView.WheelViewStyle style = new WheelView.WheelViewStyle();
 
     public MiDayTime(Context context) {
         mContext = context;
@@ -104,7 +108,6 @@ public class MiDayTime {
         mMonthWheel = dialogView.findViewById(R.id.dialog_choose_time_month);
         mDayWheel = dialogView.findViewById(R.id.dialog_choose_time_day);
 
-
         int textSize = (ScreenUtils.getScreenHeight(mContext) / 200) * 2;
         mSubmitTitle.setTextSize(textSize);
         mCannleTitle.setTextSize(textSize);
@@ -114,6 +117,7 @@ public class MiDayTime {
         lp.width = ScreenUtils.getScreenWidth(mContext);
         window.setGravity(Gravity.BOTTOM);
         window.setAttributes(lp);
+        dialogView.setMinimumWidth(ScreenUtils.getScreenWidth(mContext));
         mDialog.setContentView(dialogView);
 
         return this;
@@ -183,43 +187,31 @@ public class MiDayTime {
         mYearWheel.setSelection(mSelectYear - mStartYear);
         mYearWheel.setVisibility(View.VISIBLE);
 
-        mMonthWheel.setWheelAdapter(new ArrayWheelAdapter(mContext));
-        mMonthWheel.setWheelSize(5);
-        mMonthWheel.setSkin(WheelView.Skin.Holo);
-        mMonthWheel.setWheelData(mMonthList);
-        mMonthWheel.setSelection(mSelectYear == mStartYear ? (mSelectMonth - mStartMonth) : (mSelectMonth - 1));
-        mMonthWheel.setVisibility(View.VISIBLE);
-
-        WheelView.WheelViewStyle style = new WheelView.WheelViewStyle();
         style.selectedTextColor = mContext.getResources().getColor(mTvColor);
         mYearWheel.setStyle(style);
-        mMonthWheel.setStyle(style);
-
         mYearWheel.setExtraText("年", mContext.getResources().getColor(mTvColor), 40, 90);
-        mMonthWheel.setExtraText("月", mContext.getResources().getColor(mTvColor), 40, 70);
 
 
         if (mType == YEAR_MONTH_DAY) {
-            mDayWheel.setWheelAdapter(new ArrayWheelAdapter(mContext));
-            mDayWheel.setWheelSize(5);
-            mDayWheel.setSkin(WheelView.Skin.Holo);
-            mDayWheel.setWheelData(mDayList);
-            //第一年并且是第一个月:剩余的
-            mDayWheel.setSelection((mSelectYear == mStartYear && mSelectMonth == mStartMonth) ? (mSelectDay - mStartDay) : (mSelectDay - 1));
-            mDayWheel.setVisibility(View.VISIBLE);
-            mDayWheel.setExtraText("日", mContext.getResources().getColor(mTvColor), 40, 70);
-            mDayWheel.setStyle(style);
+            initMonth();
+            initDay();
+        } else if (mType == YEAR_MONTH) {
+            mDayWheel.setVisibility(View.GONE);
+            initMonth();
         } else {
+            mMonthWheel.setVisibility(View.GONE);
             mDayWheel.setVisibility(View.GONE);
         }
 
         mYearWheel.setOnWheelItemSelectedListener(new WheelView.OnWheelItemSelectedListener() {
             @Override
             public void onItemSelected(int position, Object o) {
-                int parseInt = Integer.parseInt(mYearList.get(position));
-                mMonthList.clear();
-                mMonthList.addAll(getMonthList(parseInt));
-                mMonthWheel.setWheelData(mMonthList);
+                if (mType != YEAR) {
+                    int parseInt = Integer.parseInt(mYearList.get(position));
+                    mMonthList.clear();
+                    mMonthList.addAll(getMonthList(parseInt));
+                    mMonthWheel.setWheelData(mMonthList);
+                }
             }
         });
 
@@ -227,16 +219,18 @@ public class MiDayTime {
         mMonthWheel.setOnWheelItemSelectedListener(new WheelView.OnWheelItemSelectedListener() {
             @Override
             public void onItemSelected(int position, Object o) {
-                int year = Integer.parseInt((String) mYearWheel.getSelectionItem());
-                int parseInt = Integer.parseInt(mMonthList.get(position));
                 if (mType == YEAR_MONTH_DAY) {
-                    mDayList.clear();
-                    mDayList.addAll(getDayList(year, parseInt));
-                    mDayWheel.setWheelData(mDayList);
-                }
-                if (!mInit) {
-                    //如果还没有初始化呢，就去显示初始化时间
-                    setSelectView(mType);
+                    int year = Integer.parseInt((String) mYearWheel.getSelectionItem());
+                    int parseInt = Integer.parseInt(mMonthList.get(position));
+                    if (mType == YEAR_MONTH_DAY) {
+                        mDayList.clear();
+                        mDayList.addAll(getDayList(year, parseInt));
+                        mDayWheel.setWheelData(mDayList);
+                    }
+                    if (!mInit) {
+                        //如果还没有初始化呢，就去显示初始化时间
+                        setSelectView(mType);
+                    }
                 }
             }
         });
@@ -245,14 +239,18 @@ public class MiDayTime {
             @Override
             public void onClick(View v) {
                 String year = (String) mYearWheel.getSelectionItem();
-                int monthInt = Integer.parseInt((String) mMonthWheel.getSelectionItem());
-                String month = monthInt < 10 ? "0" + monthInt : monthInt + "";
                 if (mType == YEAR_MONTH_DAY) {
+                    int monthInt = Integer.parseInt((String) mMonthWheel.getSelectionItem());
+                    String month = monthInt < 10 ? "0" + monthInt : monthInt + "";
                     int dayInt = Integer.parseInt((String) mDayWheel.getSelectionItem());
                     String day = dayInt < 10 ? "0" + dayInt : dayInt + "";
                     mTimeDialogCallBack.callback(year, month, day);
-                } else {
+                } else if (mType == YEAR_MONTH) {
+                    int monthInt = Integer.parseInt((String) mMonthWheel.getSelectionItem());
+                    String month = monthInt < 10 ? "0" + monthInt : monthInt + "";
                     mTimeDialogCallBack.callback(year, month, "01");
+                } else {
+                    mTimeDialogCallBack.callback(year, "01", "01");
                 }
                 mDialog.dismiss();
             }
@@ -265,6 +263,28 @@ public class MiDayTime {
         });
     }
 
+    private static void initMonth() {
+        mMonthWheel.setWheelAdapter(new ArrayWheelAdapter(mContext));
+        mMonthWheel.setWheelSize(5);
+        mMonthWheel.setSkin(WheelView.Skin.Holo);
+        mMonthWheel.setWheelData(mMonthList);
+        mMonthWheel.setSelection(mSelectYear == mStartYear ? (mSelectMonth - mStartMonth) : (mSelectMonth - 1));
+        mMonthWheel.setVisibility(View.VISIBLE);
+        mMonthWheel.setStyle(style);
+        mMonthWheel.setExtraText("月", mContext.getResources().getColor(mTvColor), 40, 70);
+    }
+
+    private static void initDay() {
+        mDayWheel.setWheelAdapter(new ArrayWheelAdapter(mContext));
+        mDayWheel.setWheelSize(5);
+        mDayWheel.setSkin(WheelView.Skin.Holo);
+        mDayWheel.setWheelData(mDayList);
+        //第一年并且是第一个月:剩余的
+        mDayWheel.setSelection((mSelectYear == mStartYear && mSelectMonth == mStartMonth) ? (mSelectDay - mStartDay) : (mSelectDay - 1));
+        mDayWheel.setVisibility(View.VISIBLE);
+        mDayWheel.setExtraText("日", mContext.getResources().getColor(mTvColor), 40, 70);
+        mDayWheel.setStyle(style);
+    }
 
     /**
      * 设置一进来显示那一天

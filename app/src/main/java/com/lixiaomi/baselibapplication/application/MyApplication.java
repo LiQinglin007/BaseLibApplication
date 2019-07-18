@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.lixiaomi.baselib.config.AppConfigInIt;
+import com.lixiaomi.baselib.net.NetCacheInterceptor;
 import com.lixiaomi.baselibapplication.http.TokenInterceptor;
 import com.lixiaomi.baselibapplication.utils.greendaoUtils.DBManager;
 import com.tencent.smtt.sdk.QbSdk;
@@ -35,13 +36,20 @@ public class MyApplication extends Application {
         AppConfigInIt.init(this)
                 //设置调试模式，默认false
                 .withDebug(true)
+                //配置SharedPreferences
                 .withSharedPreferences(getSharedPreferences(SharedPreferences, Activity.MODE_PRIVATE))
+                //默认文件根地址
                 .withBaseFile("com.xiaomi.lib")
+                //baseUrl
                 .withBaseUrl("http://home.hbhanzhi.com:7056/")
-//                .withBaseUrl("http://home.hbhanzhi.com:6005/")
+                //添加拦截器
                 .withHttpInterceptors(new TokenInterceptor())
-                //是否信任全部证书
-                .withHttpCertificateFlag(open != null ? false : true, open)
+//                .withHttpNetWorkInterceptors(new NetCacheInterceptor())
+                //是否信任全部证书,不信任全部，则传进去证书流
+//                .withHttpCertificateFlag(open != null ? false : true, open)
+                .withHttpCertificateFlag(true,null)
+                //连接失败后是否重连
+                .withHttpRetryConnection(true)
                 .configure();
         //初始化数据库
         DBManager.getInstance().init(getApplicationContext(), DBName);

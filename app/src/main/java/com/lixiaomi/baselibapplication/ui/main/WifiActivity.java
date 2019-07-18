@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lixiaomi.baselib.base.BasePresenter;
 import com.lixiaomi.baselib.ui.dialog.MiDialog;
-import com.lixiaomi.baselib.ui.dialog.MiPreMissionDialog;
+import com.lixiaomi.baselib.ui.dialog.MiPremissionDialog;
 import com.lixiaomi.baselib.utils.LogUtils;
 import com.lixiaomi.baselib.utils.T;
 import com.lixiaomi.baselibapplication.R;
@@ -240,7 +240,7 @@ public class WifiActivity extends XMBaseActivity implements EasyPermissions.Perm
     @Override
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
         if (requestCode == WIFI_PERMISSIONS_CODE) {
-            MiPreMissionDialog.showPermissionDialog(WifiActivity.this, "Gsp", WIFI_PERMISSIONS_SET_CODE);
+            MiPremissionDialog.showPermissionDialog(WifiActivity.this, "Gsp", WIFI_PERMISSIONS_SET_CODE);
         }
     }
 

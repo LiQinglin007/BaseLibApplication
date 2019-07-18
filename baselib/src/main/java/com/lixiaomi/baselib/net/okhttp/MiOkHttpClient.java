@@ -1,11 +1,12 @@
 package com.lixiaomi.baselib.net.okhttp;
 
 
-
 import com.lixiaomi.baselib.config.AppConfigInIt;
 import com.lixiaomi.baselib.config.AppConfigType;
+import com.lixiaomi.baselib.utils.FileUtil;
 import com.lixiaomi.baselib.utils.LogUtils;
 
+import java.io.File;
 import java.io.InputStream;
 import java.math.BigInteger;
 import java.security.KeyStore;
@@ -27,6 +28,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
+import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 
@@ -51,6 +53,8 @@ public final class MiOkHttpClient {
     private static final class OkHttpHolder {
         private final static OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
         private static final ArrayList<Interceptor> INTERCEPTORS = AppConfigInIt.getConfiguration(AppConfigType.HTTP_INTERCEPTOR);
+        private static final ArrayList<Interceptor> NETWORK_INTERCEPTORS = AppConfigInIt.getConfiguration(AppConfigType.HTTP_INTERCEPTOR);
+        private static final Boolean HTTP_RETRY_CONNECTION = AppConfigInIt.getConfiguration(AppConfigType.HTTP_RETRY_CONNECTION);
 
         private final static long CONNECT_TIME_OUT = 20;
         private final static long WRITE_TIME_OUT = 20;
@@ -61,24 +65,30 @@ public final class MiOkHttpClient {
          *
          * @return
          */
-        private static final OkHttpClient.Builder addInterceptors() {
+        private static OkHttpClient.Builder addInterceptors() {
+            //应用拦截器
             if (INTERCEPTORS != null && !INTERCEPTORS.isEmpty()) {
                 for (Interceptor interceptor : INTERCEPTORS) {
                     BUILDER.addInterceptor(interceptor);
                 }
             }
+            //网络拦截器
+            if (NETWORK_INTERCEPTORS != null && !NETWORK_INTERCEPTORS.isEmpty()) {
+                for (Interceptor interceptor : NETWORK_INTERCEPTORS) {
+                    BUILDER.addNetworkInterceptor(interceptor);
+                }
+            }
             return BUILDER;
         }
+
 
         /**
          * 配置证书
          */
         private static final OkHttpClient.Builder addCertificate() {
-
             return addInterceptors()
-//            设置忽略证书 兼容https
+                    //设置忽略证书 兼容https
                     .sslSocketFactory(createSSLSocketFactory())
-
                     .hostnameVerifier(new HostnameVerifier() {
                         @Override
                         public boolean verify(String hostname, SSLSession session) {
@@ -87,15 +97,22 @@ public final class MiOkHttpClient {
                     });
         }
 
+        //配置缓存的路径，和缓存空间的大小 10M
+        static Cache cache = new Cache(new File(FileUtil.HTTP_CACHE_DIR), 10 * 10 * 1024);
 
-        private static final OkHttpClient OK_HTTP_CLIENT = addCertificate()
-                //链接超时
-                .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
-                //读取超时
-                .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
-                //写入超时
-                .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
-                .build();
+        private static final OkHttpClient OK_HTTP_CLIENT =
+                addCertificate()
+                        //链接超时
+                        .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
+                        //读取超时
+                        .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
+                        //写入超时
+                        .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
+                        //链接失败后是否重试默认为true
+                        .retryOnConnectionFailure(HTTP_RETRY_CONNECTION == null ? true : HTTP_RETRY_CONNECTION)
+                        //设置使用缓存
+                        .cache(cache)
+                        .build();
     }
 
     /**
@@ -108,11 +125,9 @@ public final class MiOkHttpClient {
         try {
             SSLContext sc = SSLContext.getInstance("TLS");
             sc.init(null, new TrustManager[]{new TrustAllCerts()}, new SecureRandom());
-
             ssfFactory = sc.getSocketFactory();
         } catch (Exception e) {
         }
-
         return ssfFactory;
     }
 
@@ -132,10 +147,10 @@ public final class MiOkHttpClient {
             InputStream configurationInput = AppConfigInIt.getConfiguration(AppConfigType.HTTP_CERTIFICATE_INPUT);
             if (configurationFlag || configurationInput == null) {
                 //信任所有证书
-                LogUtils.loge("信任所有证书");
+                LogUtils.logd("信任所有证书");
                 return;
             } else {
-                LogUtils.loge("配置证书");
+                LogUtils.logd("配置证书");
                 if (chain == null) {
                     throw new CertificateException("checkServerTrusted: X509Certificate array is null");
                 }

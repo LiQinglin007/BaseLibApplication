@@ -29,6 +29,10 @@ public enum AppConfigType {
      */
     HTTP_INTERCEPTOR,
     /**
+     * 网络拦截器
+     */
+    HTTP_NETWORK_INTERCEPTOR,
+    /**
      * 是否信任所有证书
      */
     HTTP_CERTIFICATE_FLAG,
@@ -36,6 +40,10 @@ public enum AppConfigType {
      * 证书流
      */
     HTTP_CERTIFICATE_INPUT,
+    /**
+     * 链接失败后是否重试
+     */
+    HTTP_RETRY_CONNECTION,
     /**
      * 请求框架，配置的BaseUrl
      */

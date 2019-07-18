@@ -34,6 +34,11 @@ public class MiDiDiTime {
      */
     private static int mEendHour = 24;
 
+    /**
+     * 可以预约几天之后的
+     */
+    private static int mDayNumber = 3;
+
     private static Dialog mDialog;
     private static AppCompatButton mSubmitTitle;
     private static AppCompatButton mCannleTitle;
@@ -46,6 +51,7 @@ public class MiDiDiTime {
     private static int mTvColor;
 
     private static TimeDialogCallBack mTimeDialogCallBack;
+    private static ArrayList<String> mDayList = new ArrayList<>();
 
     public MiDiDiTime(Context context) {
         mContext = context;
@@ -90,7 +96,9 @@ public class MiDiDiTime {
      * @return
      */
     public MiDiDiTime setEndHour(int endHour) {
-        MiDiDiTime.mEendHour = endHour;
+        if (endHour > -1) {
+            MiDiDiTime.mEendHour = endHour;
+        }
         return this;
     }
 
@@ -102,7 +110,16 @@ public class MiDiDiTime {
      * @return
      */
     public MiDiDiTime setStartHour(int startHour) {
-        MiDiDiTime.mStartHour = startHour;
+        if (startHour > -1) {
+            MiDiDiTime.mStartHour = startHour;
+        }
+        return this;
+    }
+
+    public MiDiDiTime setDayNumber(int dayNumber) {
+        if (dayNumber > 0) {
+            MiDiDiTime.mDayNumber = dayNumber;
+        }
         return this;
     }
 
@@ -124,14 +141,14 @@ public class MiDiDiTime {
     }
 
 
-
     private void initData() {
+        mDayList.clear();
         /**
          * 营业时间 7：00-22：00
          * 今天晚上22点之前的，能预约今，明，后三天的；
          * 今天晚上22点之后的，能预约明，后，大后三天。
          */
-        Date mDate = new Date();
+        final Date mDate = new Date();
         //现在几点
         int hours = mDate.getHours();
         ArrayList<String> mDateList = new ArrayList<>();
@@ -145,23 +162,35 @@ public class MiDiDiTime {
             for (int j = mStartHour; j <= mEendHour; j++) {
                 mTimeList1.add(j + "");
             }
-            //今天
-            mDateList.add(MiDateUtils.getMonthDayWeek(mDate));
-            //明天
-            mDateList.add(MiDateUtils.getMonthDayWeek(MiDateUtils.getAgoOrNextDay(mDate,1)));
-            //后天
-            mDateList.add(MiDateUtils.getMonthDayWeek(MiDateUtils.getAgoOrNextDay(mDate,2)));
+            for (int d = 0; d < mDayNumber; d++) {
+                //从今天开始
+                mDateList.add(MiDateUtils.getMonthDayWeek(MiDateUtils.getAgoOrNextDay(mDate, d)));
+                mDayList.add(MiDateUtils.dateToString(MiDateUtils.getAgoOrNextDay(mDate, d), MiDateUtils.YMD));
+            }
+
+
+//            //今天
+//            mDateList.add(MiDateUtils.getMonthDayWeek(mDate));
+//            //明天
+//            mDateList.add(MiDateUtils.getMonthDayWeek(MiDateUtils.getAgoOrNextDay(mDate, 1)));
+//            //后天
+//            mDateList.add(MiDateUtils.getMonthDayWeek(MiDateUtils.getAgoOrNextDay(mDate, 2)));
         } else {
             for (int i = mStartHour; i <= mEendHour; i++) {
                 mTimeList1.add(i + "");
                 mTimeList.add(i + "");
             }
-            //明天
-            mDateList.add(MiDateUtils.getMonthDayWeek(MiDateUtils.getAgoOrNextDay(mDate,1)));
-            //后天
-            mDateList.add(MiDateUtils.getMonthDayWeek(MiDateUtils.getAgoOrNextDay(mDate,2)));
-            //大后天
-            mDateList.add(MiDateUtils.getMonthDayWeek(MiDateUtils.getAgoOrNextDay(mDate,3)));
+            //从明天开始
+            for (int d = 1; d <= mDayNumber ; d++) {
+                mDateList.add(MiDateUtils.getMonthDayWeek(MiDateUtils.getAgoOrNextDay(mDate, d)));
+                mDayList.add(MiDateUtils.dateToString(MiDateUtils.getAgoOrNextDay(mDate, d), MiDateUtils.YMD));
+            }
+//            //明天
+//            mDateList.add(MiDateUtils.getMonthDayWeek(MiDateUtils.getAgoOrNextDay(mDate, 1)));
+//            //后天
+//            mDateList.add(MiDateUtils.getMonthDayWeek(MiDateUtils.getAgoOrNextDay(mDate, 2)));
+//            //大后天
+//            mDateList.add(MiDateUtils.getMonthDayWeek(MiDateUtils.getAgoOrNextDay(mDate, 3)));
         }
 
 
@@ -202,11 +231,12 @@ public class MiDiDiTime {
         mSubmitTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String timeSelectionItem = (String) mDateWheel.getSelectionItem();
                 int hourSelectionInt = Integer.parseInt((String) mHourWheel.getSelectionItem());
                 String hourSelectionItem = hourSelectionInt < 10 ? "0" + hourSelectionInt : hourSelectionInt + "";
                 if (mTimeDialogCallBack != null) {
-                    mTimeDialogCallBack.callback(timeSelectionItem, hourSelectionItem);
+                    mTimeDialogCallBack.callback(timeSelectionItem, mDayList.get(mDateWheel.getSelection()), hourSelectionItem);
                 }
                 mDialog.dismiss();
             }
@@ -225,9 +255,10 @@ public class MiDiDiTime {
         /**
          * 选中后的回调
          *
-         * @param date
+         * @param dateWeek(几月几号星期几)
+         * @param date              xxxx-xx-xx
          * @param time
          */
-        void callback(String date, String time);
+        void callback(String dateWeek, String date, String time);
     }
 }

@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.lixiaomi.baselib.base.BasePresenter;
-import com.lixiaomi.baselib.ui.dialog.MiPreMissionDialog;
+import com.lixiaomi.baselib.ui.dialog.MiPremissionDialog;
 import com.lixiaomi.baselib.utils.FileUtil;
 import com.lixiaomi.baselibapplication.R;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseActivity;
@@ -64,7 +64,7 @@ public class ChoosePicActivity extends XMBaseActivity implements EasyPermissions
             if (perms.contains(permission[0]) && perms.contains(permission[1]) && perms.contains(permission[2])) {
                 hasPermission();
             } else {
-                MiPreMissionDialog.showPermissionDialog(ChoosePicActivity.this, "相机、读写文件", PERMISSION_SETTING_CODE);
+                MiPremissionDialog.showPermissionDialog(ChoosePicActivity.this, "相机、读写文件", PERMISSION_SETTING_CODE);
             }
         }
     }
@@ -72,7 +72,7 @@ public class ChoosePicActivity extends XMBaseActivity implements EasyPermissions
     @Override
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
         if (requestCode == PERMISSION_CODE) {
-            MiPreMissionDialog.showPermissionDialog(ChoosePicActivity.this, "相机、读写文件", PERMISSION_SETTING_CODE);
+            MiPremissionDialog.showPermissionDialog(ChoosePicActivity.this, "相机、读写文件", PERMISSION_SETTING_CODE);
         }
     }
 
@@ -87,7 +87,7 @@ public class ChoosePicActivity extends XMBaseActivity implements EasyPermissions
             } else {
                 //如果被拒绝过了
                 if (EasyPermissions.somePermissionDenied(ChoosePicActivity.this, permission)) {
-                    MiPreMissionDialog.showPermissionDialog(ChoosePicActivity.this, "相机、读写文件", PERMISSION_SETTING_CODE);
+                    MiPremissionDialog.showPermissionDialog(ChoosePicActivity.this, "相机、读写文件", PERMISSION_SETTING_CODE);
                 } else {
                     //没有被拒绝过，就去申请权限
                     EasyPermissions.requestPermissions(ChoosePicActivity.this, "图片选择需要以下权限:\n\n1.访问设备上的照片\n\n2.拍照", PERMISSION_CODE, permission);

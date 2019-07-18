@@ -25,12 +25,12 @@ public class MyHttpModel2 implements IMyHttpModel2 {
         final String mAesPassword = HttpUtils.getAESPassword();
         LogUtils.loge("加密前请求参数:" + sendJson);
         LogUtils.loge("mAesPassword:" + mAesPassword);
-        MiSendRequestOkHttp.sendPost(HttpUtils.getHeads(mAesPassword), AESUtil.encrypt(sendJson, mAesPassword), "http://hz.zhcun.cn:/api/ApiUser/Login", new MiOkHttpCallBack() {
+        MiSendRequestOkHttp.sendPost(HttpUtils.getHeads(mAesPassword), AESUtil.encrypt(sendJson, mAesPassword), "http://hz.zhcun.cn:/api/ApiUser/Login", 0, new MiOkHttpCallBack() {
             @Override
             public void onSuccess(int code, String response) {
                 LogUtils.loge("解密前：response:" + response);
                 String s = AESUtil.desEncrypt(response, mAesPassword);
-                LogUtils.loge("URL:http://hz.zhcun.cn:/api/ApiUser/Login"  + "code:" + code + " response:" + s);
+                LogUtils.loge("URL:http://hz.zhcun.cn:/api/ApiUser/Login" + "code:" + code + " response:" + s);
                 myPresenterCallBack.success(code, s);
             }
 

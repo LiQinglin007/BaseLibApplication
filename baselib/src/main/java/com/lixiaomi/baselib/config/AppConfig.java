@@ -27,6 +27,10 @@ public final class AppConfig {
      * okhttp的拦截器集合
      */
     private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
+    /**
+     * 网络拦截器
+     */
+    private static final ArrayList<Interceptor> NETWORK_INTERCEPTORS = new ArrayList<>();
 
     public static AppConfig getInstance() {
         return SingletonHolder.INSTANCE;
@@ -67,7 +71,20 @@ public final class AppConfig {
     }
 
     /**
-     * 配置okhttp拦截器
+     * 配置okhttp网络拦截器
+     *
+     * @param interceptor
+     * @return
+     */
+    public final AppConfig withHttpNetWorkInterceptors(Interceptor interceptor) {
+        NETWORK_INTERCEPTORS.add(interceptor);
+        APP_CONFIGS.put(AppConfigType.HTTP_NETWORK_INTERCEPTOR, NETWORK_INTERCEPTORS);
+        return this;
+    }
+
+
+    /**
+     * 配置okhttp应用拦截器
      *
      * @param interceptor
      * @return
@@ -78,23 +95,9 @@ public final class AppConfig {
         return this;
     }
 
-    /**
-     * 配置是否信任所有证书,用于https请求，如果不信任，请构建自己服务器的公钥传递进来
-     *
-     * @param certificateFlag
-     * @param inputStream  不信任所有证书，传递自己服务器的公钥进来.cer文件
-     * @return
-     */
-    public final AppConfig withHttpCertificateFlag(boolean certificateFlag,InputStream inputStream) {
-        APP_CONFIGS.put(AppConfigType.HTTP_CERTIFICATE_FLAG, certificateFlag);
-        APP_CONFIGS.put(AppConfigType.HTTP_CERTIFICATE_INPUT, inputStream);
-        return this;
-    }
-
-
 
     /**
-     * 配置okhttp拦截器
+     * 配置okhttp应用拦截器
      *
      * @param interceptorList
      * @return
@@ -102,6 +105,31 @@ public final class AppConfig {
     public final AppConfig withHttpInterceptors(ArrayList<Interceptor> interceptorList) {
         INTERCEPTORS.addAll(interceptorList);
         APP_CONFIGS.put(AppConfigType.HTTP_INTERCEPTOR, INTERCEPTORS);
+        return this;
+    }
+
+
+    /**
+     * 配置是否信任所有证书,用于https请求，如果不信任，请构建自己服务器的公钥传递进来
+     *
+     * @param certificateFlag
+     * @param inputStream     不信任所有证书，传递自己服务器的公钥进来.cer文件
+     * @return
+     */
+    public final AppConfig withHttpCertificateFlag(boolean certificateFlag, InputStream inputStream) {
+        APP_CONFIGS.put(AppConfigType.HTTP_CERTIFICATE_FLAG, certificateFlag);
+        APP_CONFIGS.put(AppConfigType.HTTP_CERTIFICATE_INPUT, inputStream);
+        return this;
+    }
+
+    /**
+     * 链接失败后是否重试去链接
+     *
+     * @param retryConnection 默认为true:重试链接
+     * @return
+     */
+    public final AppConfig withHttpRetryConnection(boolean retryConnection) {
+        APP_CONFIGS.put(AppConfigType.HTTP_RETRY_CONNECTION, retryConnection);
         return this;
     }
 

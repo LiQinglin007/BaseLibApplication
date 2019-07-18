@@ -36,7 +36,7 @@ ext {
     aviLibrary = "2.1.3"
     glide = "4.8.0"
     glideCompiler = "4.8.0"
-    okhttp3_integration="4.8.0"
+    okhttp3_integration = "4.8.0"
     gson = "2.8.5"
     eventbus = "3.1.1"
     easypermissions = "2.0.1"
@@ -98,10 +98,227 @@ dependencies {
     api "cn.bingoogolapple:bga-baseadapter:$bga_baseadapter"
 }
 
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
+// 配置maven库，生成POM.xml文件
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                name 'Android BaseLib Application.'
+                url 'https://github.com/LiQinglin007/BaseLibApplication'
+                licenses {
+                    license {
+                        name 'Android BaseLib Application.'
+                        url 'https://github.com/LiQinglin007/BaseLibApplication'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'lixiaomi0007'
+                        //填写邮件地址
+                        email 'liqinglin0007nice@gmail.com'
+                    }
+                }
+                scm {
+                    connection 'https://github.com/LiQinglin007/BaseLibApplication.git'
+                    developerConnection 'https://github.com/LiQinglin007/BaseLibApplication.git'
+                    url 'https://github.com/LiQinglin007/BaseLibApplication'
+                }
+                //这里有引号，并且有个空格，否则生成不了依赖，主要是这里的dependencies并不是build.gradle里的dependencies，而gradle会把他当成自身的dependencies处理
+                dependencies {
+                    dependency {
+                        groupId "com.google.code.gson"
+                        artifactId "gson"
+                        version "$gson"
+                        //同dependencies
+                    }
+                    dependency {
+                        groupId "com.android.support"
+                        artifactId "support-v4"
+                        version "$support_v4"
+                    }
+                    dependency {
+                        groupId "com.android.support"
+                        artifactId "appcompat-v7"
+                        version "$support_v7"
+                    }
+                    dependency {
+                        groupId "com.android.support"
+                        artifactId "design"
+                        version "$support_design"
+                    }
+                    dependency {
+                        groupId "com.android.support"
+                        artifactId "cardview-v7"
+                        version "$support_cardview"
+                    }
+                    dependency {
+                        groupId "com.android.support.constraint"
+                        artifactId "constraint-layout"
+                        version "$constraint_layout"
+                    }
+                    //分包
+                    dependency {
+                        groupId "com.android.support"
+                        artifactId "multidex"
+                        version "$multidex"
+                    }
+                    //    //网络请求依赖
+                    dependency {
+                        groupId "com.squareup.okhttp3"
+                        artifactId "okhttp"
+                        version "$okhttp3"
+                    }
+                    dependency {
+                        groupId "com.squareup.okio"
+                        artifactId "okio"
+                        version "$okio"
+                    }
+                    dependency {
+                        groupId "com.squareup.retrofit2"
+                        artifactId "retrofit"
+                        version "$retrofit"
+                    }
+                    dependency {
+                        groupId "com.squareup.retrofit2"
+                        artifactId "converter-scalars"
+                        version "$converter_scalars"
+                    }
+                    //    //一个Loading的开源库
+                    dependency {
+                        groupId "com.wang.avi"
+                        artifactId "library"
+                        version "$aviLibrary"
+                    }
+                    dependency {
+                        groupId "com.github.bumptech.glide"
+                        artifactId "glide"
+                        version "$glide"
+                    }
+                    //时间总线
+                    dependency {
+                        groupId "org.greenrobot"
+                        artifactId "eventbus"
+                        version "$eventbus"
+                    }
+                    //权限
+                    dependency {
+                        groupId "pub.devrel"
+                        artifactId "easypermissions"
+                        version "$easypermissions"
+                    }
+//                    api "com.bigkoo:ConvenientBanner:$convenientbanner"
+//                    com.bigkoo:ConvenientBanner:2.1.4
+////banner  git:https://github.com/saiwu-bigkoo/Android-ConvenientBanner
+                    dependency {
+                        groupId "com.bigkoo"
+                        artifactId "ConvenientBanner"
+                        version "$convenientbanner"
+                    }
+                    //状态栏  https://github.com/gyf-dev/ImmersionBar
+                    dependency {
+                        groupId "com.gyf.immersionbar"
+                        artifactId "immersionbar"
+                        version "$barlibrary"
+                    }
+                    //RecyclerView依赖
+                    dependency {
+                        groupId "com.github.CymChad"
+                        artifactId "BaseRecyclerViewAdapterHelper"
+                        version "$BaseRecyclerViewAdapterHelper"
+                    }
+                    //RecyclerView 分割线  https://github.com/ChoicesWang/RecyclerView_Divider
+                    dependency {
+                        groupId "com.choices.divider"
+                        artifactId "RecyclerView_Divider"
+                        version "$RecyclerView_Divider"
+                    }
+                    //    //LuBan压缩
+                    dependency {
+                        groupId "top.zibin"
+                        artifactId "Luban"
+                        version "$Luban"
+                    }
+//    //    https://github.com/venshine/WheelView
+                    dependency {
+                        groupId "com.wx.wheelview"
+                        artifactId "wheelview"
+                        version "$wheelview"
+                    }
+                    dependency {
+                        groupId "cn.bingoogolapple"
+                        artifactId "bga-photopicker"
+                        version "$bga_photopicker"
+                    }
+                    dependency {
+                        groupId "cn.bingoogolapple"
+                        artifactId "bga-baseadapter"
+                        version "$bga_baseadapter"
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+//生成源文件
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+//生成文档
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    options.encoding = "UTF-8"
+    options.encoding "UTF-8"
+    options.charSet 'UTF-8'
+    options.author true
+    options.version true
+    options.links "https://github.com/linglongxin24/FastDev/tree/master/mylibrary/docs/javadoc"
+    failOnError false
 }
 
+//文档打包成jar
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+//拷贝javadoc文件
+task copyDoc(type: Copy) {
+    from "${buildDir}/docs/"
+    into "docs"
+}
+
+//上传到jcenter所需要的源码文件
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+//发布到组织名称名字，必须填写
+group = "com.lixiaomi"//groupId
+// 版本号，下次更新是只需要更改版本号即可
+version = "1.0.1"
+
+//上传到jcenter
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    user = properties.getProperty("bintray.user")    //读取 local.properties 文件里面的 bintray.user
+    key = properties.getProperty("bintray.apikey")   //读取 local.properties 文件里面的 bintray.apikey
+    configurations = ['archives']
+    pkg {
+        repo = 'AndroidBaseLib'//创建的仓库(Repository)名字
+        name = 'com.lixiaomi'  //发布到JCenter上的项目名字，必须填写,同groupId
+        desc = 'Android BaseLib Application.'    //项目描述
+        websiteUrl = 'https://github.com/LiQinglin007/BaseLibApplication'
+        vcsUrl = 'https://github.com/LiQinglin007/BaseLibApplication.git'
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}

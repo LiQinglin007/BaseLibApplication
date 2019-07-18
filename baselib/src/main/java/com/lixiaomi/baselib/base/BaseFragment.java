@@ -17,7 +17,7 @@ import com.lixiaomi.baselib.ui.Loading.XiaomiLoader;
  * @remarks：<br>
  * @changeTime:<br>
  */
-public abstract class BaseFragment<V extends BaseView, P extends BasePresenter> extends Fragment implements PermissionChecker {
+public abstract class BaseFragment<V extends BaseView, P extends BasePresenter> extends Fragment   {
 
     protected final String TAG = this.getClass().getSimpleName();
     protected P mPersenter;

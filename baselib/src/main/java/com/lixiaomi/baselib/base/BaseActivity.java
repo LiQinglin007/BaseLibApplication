@@ -17,7 +17,7 @@ import com.lixiaomi.baselib.ui.Loading.XiaomiLoader;
  * @remarks：<br>
  * @changeTime:<br>
  */
-public abstract class BaseActivity<V extends BaseView, P extends BasePresenter> extends AppCompatActivity implements PermissionChecker {
+public abstract class BaseActivity<V extends BaseView, P extends BasePresenter> extends AppCompatActivity   {
     protected final String TAG = this.getClass().getSimpleName();
     protected P mPersenter;
     /**

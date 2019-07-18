@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -38,20 +39,23 @@
         android:layout_height="wrap_content">
 
         <com.wx.wheelview.widget.WheelView
+            android:background="@color/default_color"
             android:id="@+id/dialog_choose_time_year"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="10dp"
             android:layout_weight="1" />
 
         <com.wx.wheelview.widget.WheelView
             android:id="@+id/dialog_choose_time_month"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <com.wx.wheelview.widget.WheelView
             android:id="@+id/dialog_choose_time_day"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 

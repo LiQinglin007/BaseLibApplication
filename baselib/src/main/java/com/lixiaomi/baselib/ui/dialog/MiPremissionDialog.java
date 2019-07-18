@@ -13,7 +13,7 @@ import android.support.v4.app.Fragment;
  * @remarks：<br>
  * @changeTime:<br>
  */
-public class MiPreMissionDialog {
+public class MiPremissionDialog {
 
     /**
      * 提示用户前往设置页面的  mDialog
@@ -26,7 +26,7 @@ public class MiPreMissionDialog {
         new MiDialog(mActivity, MiDialog.MESSAGE_TYPE)
                 .builder()
                 .setTitle("权限提醒")
-                .setMsg("请在权限管理中允许" + message + "权限")
+                .setMsg(message)
                 .setOkButton("去设置", new MiDialog.DialogCallBack() {
                     @Override
                     public void dialogCallBack(String connect) {
@@ -52,7 +52,7 @@ public class MiPreMissionDialog {
         new MiDialog(mFragment.getActivity(), MiDialog.MESSAGE_TYPE)
                 .builder()
                 .setTitle("权限提醒")
-                .setMsg("请在权限管理中允许" + message + "权限")
+                .setMsg(message)
                 .setOkButton("去设置", new MiDialog.DialogCallBack() {
                     @Override
                     public void dialogCallBack(String connect) {

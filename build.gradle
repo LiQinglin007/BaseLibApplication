@@ -7,7 +7,7 @@ buildscript {
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
+        classpath 'com.android.tools.build:gradle:3.2.0'
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // add plugin
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.1'
@@ -25,7 +25,10 @@ allprojects {
     }
 }
 
+//task clean(type: Delete) {
+//    delete rootProject.buildDirorg.gradle.api.internal.component.Usage
+//}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-

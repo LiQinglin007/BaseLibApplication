@@ -24,7 +24,7 @@ import com.lixiaomi.baselib.ui.chooseDateUtils.MiDiDiTime;
 import com.lixiaomi.baselib.ui.chooseDateUtils.MiMinTime;
 import com.lixiaomi.baselib.ui.dialog.MiBottomDialog;
 import com.lixiaomi.baselib.ui.dialog.MiDialog;
-import com.lixiaomi.baselib.ui.dialog.MiPreMissionDialog;
+import com.lixiaomi.baselib.ui.dialog.MiPremissionDialog;
 import com.lixiaomi.baselib.ui.dialog.dialoglist.MiDialogList;
 import com.lixiaomi.baselib.ui.dialog.dialoglist.MiListInterface;
 import com.lixiaomi.baselib.utils.FileUtil;
@@ -129,6 +129,7 @@ public class MineFragment extends XMBaseFragment implements View.OnClickListener
                         .setStartDate(startDate)
                         .setEndDate(endDate)
                         .setSelectDate(selectDate)
+                        .setType(MiDayTime.YEAR)
                         .setTvColor(R.color.warning_color5)
                         .setCallBack(new MiDayTime.TimeDialogCallBack() {
                             @Override
@@ -159,12 +160,14 @@ public class MineFragment extends XMBaseFragment implements View.OnClickListener
                 new MiDiDiTime(getActivity())
                         .builder()
                         .setStartHour(2)
-                        .setEndHour(12)
+                        .setEndHour(20)
+                        .setDayNumber(5)
                         .setTextColor(R.color.warning_color3)
                         .setTimeDialogCallBack(new MiDiDiTime.TimeDialogCallBack() {
                             @Override
-                            public void callback(String date, String time) {
-                                chooseTimeDidi.setText("选择预约时间(仿滴滴)：    " + date + time + "时");
+                            public void callback(String dateWeek, String date, String time) {
+                                chooseTimeDidi.setText("选择预约时间(仿滴滴)：    " + dateWeek + time + "时");
+                                LogUtils.logd("选择预约时间(仿滴滴)：    " + date);
                             }
                         })
                         .show();
@@ -193,7 +196,7 @@ public class MineFragment extends XMBaseFragment implements View.OnClickListener
                 startActivity(new Intent(getActivity(), MyDesignMainActivity.class));
                 break;
             case R.id.mine_bottom_list:
-                //底部弹出dialogList
+                //中间弹出dialogList
                 mBeanArrayList.clear();
                 for (int i = 0; i < 20; i++) {
                     mBeanArrayList.add(new NoticeBean(null, "标题巴拉巴拉" + i, "内容巴拉巴拉" + i));
@@ -207,7 +210,12 @@ public class MineFragment extends XMBaseFragment implements View.OnClickListener
                         .setCallBack(new MiDialogList.OnDialogListCallback() {
                             @Override
                             public void onListCallback(ArrayList<Integer> position) {
-                                T.shortToast(getActivity(), new Gson().toJson(mBeanArrayList.get(position.get(0))));
+                                int size = position.size();
+                                for (int i = 0; i < size; i++) {
+                                    LogUtils.loge(TAG, new Gson().toJson(mBeanArrayList.get(position.get(i))));
+                                }
+                                T.shortToast(getActivity(), "您选择了" + size + "个用户，去控制台查看详情吧");
+
                             }
                         })
                         .show();
@@ -226,11 +234,7 @@ public class MineFragment extends XMBaseFragment implements View.OnClickListener
                         .setCallBack(new MiDialogList.OnDialogListCallback() {
                             @Override
                             public void onListCallback(ArrayList<Integer> position) {
-                                int size = position.size();
-                                for (int i = 0; i < size; i++) {
-                                    LogUtils.loge(TAG, new Gson().toJson(mBeanArrayList.get(position.get(i))));
-                                }
-                                T.shortToast(getActivity(), "您选择了" + size + "个用户，去控制台查看详情吧");
+                                T.shortToast(getActivity(), new Gson().toJson(mBeanArrayList.get(position.get(0))));
                             }
                         })
                         .show();
@@ -242,23 +246,43 @@ public class MineFragment extends XMBaseFragment implements View.OnClickListener
                 startActivity(new Intent(getActivity(), ChoosePicActivity.class));
                 break;
             case R.id.mine_sing_out:
-                new MiDialog(getActivity(), MiDialog.MESSAGE_TYPE)
-                        .builder()
-                        .setTitle("提示")
-                        .setPassword(true)
-                        .setMsg("确定要退出么？")
-                        .setCannleButton("取消", null)
-                        .setOkButton("退出", new MiDialog.DialogCallBack() {
-                            @Override
-                            public void dialogCallBack(String connect) {
-                                BaseAppManager.getInstance().clear();
-                                getActivity().finish();
-                            }
-                        })
-                        .show();
+                if (chooseSingOutSwitch.isChecked()) {
+                    new MiDialog(getActivity(), MiDialog.MESSAGE_TYPE)
+                            .builder()
+                            .setTitle("提示")
+                            .setPassword(true)
+                            .setMsg("确定要退出么？")
+                            .setCannleButton("取消", null)
+                            .setOkButton("退出", new MiDialog.DialogCallBack() {
+                                @Override
+                                public void dialogCallBack(String connect) {
+                                    BaseAppManager.getInstance().clear();
+                                    getActivity().finish();
+                                }
+                            })
+                            .show();
+                } else {
+                    new MiDialog(getActivity(), MiDialog.EDIT_TYPE)
+                            .builder()
+                            .setTitle("提示")
+                            .setPassword(true)
+                            .setMsg("确定要退出么？")
+                            .setCannleButton("取消", null)
+                            .setOkButton("退出", new MiDialog.DialogCallBack() {
+                                @Override
+                                public void dialogCallBack(String connect) {
+                                    BaseAppManager.getInstance().clear();
+                                    getActivity().finish();
+                                }
+                            })
+                            .show();
+                }
                 break;
             case R.id.mine_switch_fragment:
                 EventBus.getDefault().post(new MiEventMessage(MiEventMessage.SWITCH_FRAGMENT, 0));
+                break;
+            case R.id.mine_permission:
+                getActivity().startActivity(new Intent(getActivity(), PermissionsActivity.class));
                 break;
             default:
                 break;
@@ -282,7 +306,7 @@ public class MineFragment extends XMBaseFragment implements View.OnClickListener
             if (perms.contains(permission[0]) && perms.contains(permission[1]) && perms.contains(permission[2])) {
                 hasPermission();
             } else {
-                MiPreMissionDialog.showPermissionDialog(MineFragment.getInstance(), "相机、读写文件", RC_CHOOSE_PHOTO_SETTING);
+                MiPremissionDialog.showPermissionDialog(MineFragment.getInstance(), "相机、读写文件", RC_CHOOSE_PHOTO_SETTING);
             }
         }
     }
@@ -290,7 +314,7 @@ public class MineFragment extends XMBaseFragment implements View.OnClickListener
     @Override
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
         if (requestCode == PERMISSION_CODE) {
-            MiPreMissionDialog.showPermissionDialog(MineFragment.getInstance(), "相机、读写文件", RC_CHOOSE_PHOTO_SETTING);
+            MiPremissionDialog.showPermissionDialog(MineFragment.getInstance(), "相机、读写文件", RC_CHOOSE_PHOTO_SETTING);
         }
     }
 
@@ -304,7 +328,7 @@ public class MineFragment extends XMBaseFragment implements View.OnClickListener
             } else {
                 //如果被拒绝过了
                 if (EasyPermissions.somePermissionDenied(MineFragment.getInstance(), permission)) {
-                    MiPreMissionDialog.showPermissionDialog(MineFragment.getInstance(), "相机、读写文件", RC_CHOOSE_PHOTO_SETTING);
+                    MiPremissionDialog.showPermissionDialog(MineFragment.getInstance(), "相机、读写文件", RC_CHOOSE_PHOTO_SETTING);
                 } else {
                     //没有被拒绝过，就去申请权限
                     EasyPermissions.requestPermissions(MineFragment.getInstance(), "图片选择需要以下权限:\n\n1.访问设备上的照片\n\n2.拍照", PERMISSION_CODE, permission);
@@ -358,6 +382,7 @@ public class MineFragment extends XMBaseFragment implements View.OnClickListener
     AppCompatTextView chooseTimeDidi;
     AppCompatTextView chooseTimeMin;
     SwitchCompat chooseTimeSwitch;
+    SwitchCompat chooseSingOutSwitch;
     AppCompatTextView chooseSex;
     AppCompatTextView designUi;
     AppCompatTextView bottomList;
@@ -367,6 +392,7 @@ public class MineFragment extends XMBaseFragment implements View.OnClickListener
     AppCompatTextView mHttpUtil;//发布朋友圈
     AppCompatTextView singOutTv;//退出
     AppCompatTextView switchFragmentTv;//退出
+    AppCompatTextView permissionTv;//退出
 
 
     @Override
@@ -393,7 +419,9 @@ public class MineFragment extends XMBaseFragment implements View.OnClickListener
         mHttpUtil = rootView.findViewById(R.id.mine_http);
         choosePic = rootView.findViewById(R.id.mine_choose_pic);
         singOutTv = rootView.findViewById(R.id.mine_sing_out);
+        chooseSingOutSwitch = rootView.findViewById(R.id.mine_sing_out_sw);
         switchFragmentTv = rootView.findViewById(R.id.mine_switch_fragment);
+        permissionTv = rootView.findViewById(R.id.mine_permission);
 
 
         takePic.setOnClickListener(this);
@@ -409,6 +437,7 @@ public class MineFragment extends XMBaseFragment implements View.OnClickListener
         singOutTv.setOnClickListener(this);
         mHttpUtil.setOnClickListener(this);
         switchFragmentTv.setOnClickListener(this);
+        permissionTv.setOnClickListener(this);
     }
 
     int REQUEST_CODE_CROP = 0x66;

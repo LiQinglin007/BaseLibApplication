@@ -25,11 +25,11 @@ public class LogUtils {
      * @param conetnt
      */
     public static void loge(String tag, String conetnt) {
-        showLargeLog(tag, conetnt + "###");
+        showLargeLoge(tag, conetnt + "###");
     }
 
     public static void loge(String conetnt) {
-        showLargeLog("XiaomiLibrary", conetnt + "###");
+        showLargeLoge("XiaomiLibrary", conetnt + "###");
     }
 
     public static void loge(String tag, String... contents) {
@@ -38,7 +38,7 @@ public class LogUtils {
             stb.append("\n");
             stb.append(content);
         }
-        showLargeLog(tag, stb.toString() + "###");
+        showLargeLoge(tag, stb.toString() + "###");
     }
 
     public static void loge(String... contents) {
@@ -47,15 +47,15 @@ public class LogUtils {
             stb.append("\n");
             stb.append(content);
         }
-        showLargeLog("XiaomiLibrary", stb.toString() + "###");
+        showLargeLoge("XiaomiLibrary", stb.toString() + "###");
     }
 
     public static void logd(String tag, String conetnt) {
-        showLargeLog(tag, conetnt + "###");
+        showLargeLogd(tag, conetnt + "###");
     }
 
     public static void logd(String conetnt) {
-        showLargeLog("XiaomiLibrary", conetnt + "###");
+        showLargeLogd("XiaomiLibrary", conetnt + "###");
     }
 
     public static void logd(String tag, String... contents) {
@@ -64,7 +64,7 @@ public class LogUtils {
             stb.append("\n");
             stb.append(content);
         }
-        showLargeLog(tag, stb.toString() + "###");
+        showLargeLogd(tag, stb.toString() + "###");
     }
 
     public static void logd(String... contents) {
@@ -73,7 +73,7 @@ public class LogUtils {
             stb.append("\n");
             stb.append(content);
         }
-        showLargeLog("XiaomiLibrary", stb.toString() + "###");
+        showLargeLogd("XiaomiLibrary", stb.toString() + "###");
     }
 
     /**
@@ -82,14 +82,14 @@ public class LogUtils {
      * @param logContent 打印文本
      * @param tag        打印log的标记
      */
-    private static void showLargeLog(String tag, String logContent) {
+    private static void showLargeLoge(String tag, String logContent) {
         if (logContent.length() > MAX_LENTH) {
             String show = logContent.substring(0, MAX_LENTH);
             e(tag, show);
             /*剩余的字符串如果大于规定显示的长度，截取剩余字符串进行递归，否则打印结果*/
             if ((logContent.length() - MAX_LENTH) > MAX_LENTH) {
                 String partLog = logContent.substring(MAX_LENTH, logContent.length());
-                showLargeLog(partLog, tag);
+                showLargeLoge(partLog, tag);
             } else {
                 String printLog = logContent.substring(MAX_LENTH, logContent.length());
                 e(tag, printLog);
@@ -99,10 +99,42 @@ public class LogUtils {
         }
     }
 
+    /**
+     * 分段打印出较长log文本
+     *
+     * @param logContent 打印文本
+     * @param tag        打印log的标记
+     */
+    private static void showLargeLogd(String tag, String logContent) {
+        if (logContent.length() > MAX_LENTH) {
+            String show = logContent.substring(0, MAX_LENTH);
+            e(tag, show);
+            /*剩余的字符串如果大于规定显示的长度，截取剩余字符串进行递归，否则打印结果*/
+            if ((logContent.length() - MAX_LENTH) > MAX_LENTH) {
+                String partLog = logContent.substring(MAX_LENTH, logContent.length());
+                showLargeLogd(partLog, tag);
+            } else {
+                String printLog = logContent.substring(MAX_LENTH, logContent.length());
+                d(tag, printLog);
+            }
+        } else {
+            d(tag, logContent);
+        }
+    }
+
     private static void e(String TAG, String msg) {
         try {
             if (AppConfigInIt.getConfiguration(AppConfigType.DEBUG)) {
                 Log.e(TAG, msg);
+            }
+        } catch (NullPointerException e) {
+        }
+    }
+
+    private static void d(String TAG, String msg) {
+        try {
+            if (AppConfigInIt.getConfiguration(AppConfigType.DEBUG)) {
+                Log.d(TAG, msg);
             }
         } catch (NullPointerException e) {
         }

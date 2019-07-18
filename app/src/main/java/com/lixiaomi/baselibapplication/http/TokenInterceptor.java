@@ -4,10 +4,12 @@ import com.google.gson.Gson;
 import com.lixiaomi.baselib.config.AppConfigInIt;
 import com.lixiaomi.baselib.config.AppConfigType;
 import com.lixiaomi.baselib.net.MiHttpData;
+import com.lixiaomi.baselib.net.okhttp.MiSendRequestOkHttp;
 import com.lixiaomi.baselib.utils.LogUtils;
 import com.lixiaomi.baselib.utils.PreferenceUtils;
 import com.lixiaomi.baselibapplication.bean.LoginBean;
 import com.lixiaomi.baselibapplication.bean.SendLogin;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -67,28 +69,21 @@ public class TokenInterceptor implements Interceptor {
      *
      * @return
      */
-    private String getNewToken() throws IOException {
-        //todo 使用同步方式请求数据
-        RequestBody jsonBody = RequestBody.create(MiHttpData.MEDIA_TYPE_JSON,
-                new Gson().toJson(new SendLogin("admin", "123456", 1)));
-        // 通过一个特定的接口获取新的token，此处要用到同步的retrofit请求
-        //1.定义一个client
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Request.Builder requestBuilder = new Request.Builder();
-        //2.定义一个request
-        String baseUrl = AppConfigInIt.getConfiguration(AppConfigType.HTTP_BASE_API);
-        Request request = new Request.Builder().url(baseUrl + "user/login").post(jsonBody).build();
-        //3.使用client去请求
-        Call call = okHttpClient.newCall(request);
-        //4.获得返回结果
-        String result = call.execute().body().string();
-        LoginBean loginBean = new Gson().fromJson(result, LoginBean.class);
-        if (loginBean != null) {
-            if (loginBean.getCode() == 0) {
-                PreferenceUtils.setString("token", loginBean.getData().getToken());
-                return loginBean.getData().getToken();
+    private String getNewToken() {
+        try {
+            String baseUrl = AppConfigInIt.getConfiguration(AppConfigType.HTTP_BASE_API);
+            Response response = MiSendRequestOkHttp.sendPostSync(null, new SendLogin("admin", "123456", 1), baseUrl + "user/login", 0);
+            String result = response.body().string();
+            LoginBean loginBean = new Gson().fromJson(result, LoginBean.class);
+            if (loginBean != null) {
+                if (loginBean.getCode() == 0) {
+                    PreferenceUtils.setString("token", loginBean.getData().getToken());
+                    return loginBean.getData().getToken();
+                }
             }
+            return "";
+        } catch (Exception e) {
+            return "";
         }
-        return "";
     }
 }

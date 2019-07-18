@@ -83,6 +83,11 @@ public final class FileUtil {
      */
     public static final String WEB_CACHE_DIR =
             Environment.getExternalStorageDirectory().getPath() + mPackageName + "/app_web_cache/";
+    /**
+     * 网页缓存地址
+     */
+    public static final String HTTP_CACHE_DIR =
+            Environment.getExternalStorageDirectory().getPath() + mPackageName + "/app_http_cache/";
 
     /**
      * 系统相机目录
