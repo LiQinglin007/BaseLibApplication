@@ -400,7 +400,6 @@ new MiDialog(getActivity(), MiDialog.MESSAGE_TYPE)
   ```
 
   ![弹出多选框](https://github.com/LiQinglin007/BaseLibApplication/blob/master/image/MiDialogList1.png)
-  ![弹出单选框](https://github.com/LiQinglin007/BaseLibApplication/blob/master/image/MiDialogList1.png)
   ```
   //数据源 
   ArrayList<MiListInterface> mBeanArrayList = new ArrayList<>();
