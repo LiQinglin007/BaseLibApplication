@@ -375,8 +375,8 @@ new MiDialog(getActivity(), MiDialog.MESSAGE_TYPE)
 
   ![弹出单选框](https://github.com/LiQinglin007/BaseLibApplication/blob/master/image/MiDialogList.png)
 
-  ```java
-   ArrayList<String> sexList = new ArrayList<>();
+  ```
+                 ArrayList<String> sexList = new ArrayList<>();
                   sexList.add("男");
                   sexList.add("女");
                   new MiDialogList(getActivity())
@@ -400,8 +400,8 @@ new MiDialog(getActivity(), MiDialog.MESSAGE_TYPE)
   ```
 
   ![弹出多选框](https://github.com/LiQinglin007/BaseLibApplication/blob/master/image/MiDialogList1.png)
-
-  ```java
+  ![弹出单选框](https://github.com/LiQinglin007/BaseLibApplication/blob/master/image/MiDialogList1.png)
+  ```
   //数据源 
   ArrayList<MiListInterface> mBeanArrayList = new ArrayList<>();
                   for (int i = 0; i < 20; i++) {
@@ -457,7 +457,7 @@ new MiDialog(getActivity(), MiDialog.MESSAGE_TYPE)
   
   ![选择年月日](https://github.com/LiQinglin007/BaseLibApplication/blob/master/image/Mi_Day_Time_Diolig.png)
   
-  ```java
+  ```
                   Date startDate = MiDateUtils.getDate(2018, 4, 1);
                   Date endDate = new Date();
                   Date selectDate = MiDateUtils.getDate(2018, 4, 28);            
@@ -491,7 +491,7 @@ new MiDialog(getActivity(), MiDialog.MESSAGE_TYPE)
   
   ![选择时分](https://github.com/LiQinglin007/BaseLibApplication/blob/master/image/Mi_Min_Time_Diolig.png)
   
-  ```java
+  ```
     				Date date = new Date();
                   int hours = date.getHours();
                   int minutes = date.getMinutes();
@@ -518,7 +518,7 @@ new MiDialog(getActivity(), MiDialog.MESSAGE_TYPE)
   
   适用于预约场景
   
-  ![仿照滴滴选择时间](https://github.com/LiQinglin007/BaseLibApplication/blob/master/image/MiDialogList1.png)
+  ![仿照滴滴选择时间](https://github.com/LiQinglin007/BaseLibApplication/blob/master/image/Mi_Didi_Time_Diolig.png)
   
   ```
    new MiDiDiTime(getActivity())
