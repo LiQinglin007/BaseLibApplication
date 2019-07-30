@@ -5,17 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.lixiaomi.baselib.base.BasePresenter;
+
 import com.lixiaomi.baselib.utils.LogUtils;
+import com.lixiaomi.baselib.utils.loadImageUtils.MiLoadImageUtil;
 import com.lixiaomi.baselibapplication.R;
 import com.lixiaomi.baselibapplication.bean.JsonTestBean;
 import com.lixiaomi.baselibapplication.bean.NoticeBean;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseFragment;
+import com.lixiaomi.mvplib.base.BasePresenter;
 
 import java.util.ArrayList;
 
@@ -46,6 +49,7 @@ public class HomeFragment extends XMBaseFragment implements View.OnClickListener
     Button mAddWifiButton;
     Button mJsonToObject;
     Button mViewPageButton;
+    ImageView mTestImageview;
 
     @Override
     protected Object setLayout() {
@@ -59,6 +63,9 @@ public class HomeFragment extends XMBaseFragment implements View.OnClickListener
     @Override
     protected void initView(View rootView, Bundle savedInstanceState) {
 
+        mTestImageview = rootView.findViewById(R.id.test_img);
+        String url = "https://fms.ipinyou.com/6/0B/31/B5/F001461Sm_wp001r_wtn.jpg";
+        MiLoadImageUtil.loadImage(getActivity(), url, mTestImageview);
         mChartButton = rootView.findViewById(R.id.home_chart);
         mLauncherNumberButton = rootView.findViewById(R.id.home_launcher);
         mExRecyclerButton = rootView.findViewById(R.id.home_recycler);

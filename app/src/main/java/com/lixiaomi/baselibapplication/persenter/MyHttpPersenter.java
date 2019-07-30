@@ -1,11 +1,12 @@
 package com.lixiaomi.baselibapplication.persenter;
 
-import com.lixiaomi.baselib.base.BaseModel;
-import com.lixiaomi.baselib.base.BasePresenter;
-import com.lixiaomi.baselib.base.MyPresenterCallBack;
+
 import com.lixiaomi.baselibapplication.model.MyHttpModel;
 import com.lixiaomi.baselibapplication.model.MyHttpModel2;
 import com.lixiaomi.baselibapplication.ui.main.IMyHttpActivity;
+import com.lixiaomi.mvplib.base.BaseModel;
+import com.lixiaomi.mvplib.base.BasePresenter;
+import com.lixiaomi.mvplib.base.MyPresenterCallBack;
 
 import java.util.ArrayList;
 

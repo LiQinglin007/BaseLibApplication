@@ -1,6 +1,7 @@
 package com.lixiaomi.baselibapplication.ui.main;
 
-import com.lixiaomi.baselib.base.BaseView;
+
+import com.lixiaomi.mvplib.base.BaseView;
 
 /**
  * 作者：dell or Xiaomi Li

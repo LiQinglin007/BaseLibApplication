@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.lixiaomi.baselib.config.AppConfigInIt;
-import com.lixiaomi.baselib.net.NetCacheInterceptor;
 import com.lixiaomi.baselibapplication.http.TokenInterceptor;
 import com.lixiaomi.baselibapplication.utils.greendaoUtils.DBManager;
 import com.tencent.smtt.sdk.QbSdk;

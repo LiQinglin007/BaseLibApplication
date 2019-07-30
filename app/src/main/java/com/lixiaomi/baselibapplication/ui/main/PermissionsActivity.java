@@ -8,11 +8,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.lixiaomi.baselib.base.BaseActivity;
-import com.lixiaomi.baselib.base.BasePresenter;
+
 import com.lixiaomi.baselib.utils.LogUtils;
 import com.lixiaomi.baselib.utils.PermissionsUtil;
 import com.lixiaomi.baselibapplication.R;
+import com.lixiaomi.mvplib.base.BaseActivity;
+import com.lixiaomi.mvplib.base.BasePresenter;
 
 /**
  * @describe：申请权限工具类测试<br>
@@ -72,7 +73,7 @@ public class PermissionsActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        PermissionsUtil.onActivityResult(requestCode, resultCode, data);
+        PermissionsUtil.onActivityResult(PermissionsActivity.this,requestCode, resultCode, data);
     }
 
     @Override

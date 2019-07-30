@@ -6,7 +6,7 @@ import android.os.Environment;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.lixiaomi.baselib.base.BasePresenter;
+
 import com.lixiaomi.baselib.eventmessage.MiEventMessage;
 import com.lixiaomi.baselib.service.DownloadService;
 import com.lixiaomi.baselib.utils.CheckStringEmptyUtils;
@@ -14,6 +14,7 @@ import com.lixiaomi.baselib.utils.MiFinalData;
 import com.lixiaomi.baselib.utils.T;
 import com.lixiaomi.baselibapplication.R;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseActivity;
+import com.lixiaomi.mvplib.base.BasePresenter;
 import com.tencent.smtt.sdk.TbsReaderView;
 
 import org.greenrobot.eventbus.EventBus;

@@ -6,12 +6,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-
-
-import com.lixiaomi.baselib.base.BasePresenter;
 import com.lixiaomi.baselibapplication.R;
 import com.lixiaomi.baselibapplication.adapter.TestViewPagerAdapter;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseActivity;
+import com.lixiaomi.mvplib.base.BasePresenter;
 
 import java.util.ArrayList;
 

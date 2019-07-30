@@ -19,9 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-
-
-import com.lixiaomi.baselib.base.BasePresenter;
 import com.lixiaomi.baselib.utils.CheckStringEmptyUtils;
 import com.lixiaomi.baselib.utils.T;
 import com.lixiaomi.baselib.utils.recycler.OnItemClickListener;
@@ -29,6 +26,7 @@ import com.lixiaomi.baselibapplication.R;
 import com.lixiaomi.baselibapplication.adapter.TestRecyclerAdapter;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseActivity;
 import com.lixiaomi.baselibapplication.ui.mDesign.Behavior.BehaviorTestActivity;
+import com.lixiaomi.mvplib.base.BasePresenter;
 
 import java.util.ArrayList;
 

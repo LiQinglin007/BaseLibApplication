@@ -1,4 +1,4 @@
-package com.lixiaomi.baselib.base;
+package com.lixiaomi.mvplib.base;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,9 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.lixiaomi.baselib.R;
 import com.lixiaomi.baselib.ui.Loading.LoaderStyle;
 import com.lixiaomi.baselib.ui.Loading.XiaomiLoader;
+
 /**
  * @describe：MVP架构fragment基类<br>
  * @author：Xiaomi<br>
@@ -17,7 +17,7 @@ import com.lixiaomi.baselib.ui.Loading.XiaomiLoader;
  * @remarks：<br>
  * @changeTime:<br>
  */
-public abstract class BaseFragment<V extends BaseView, P extends BasePresenter> extends Fragment   {
+public abstract class BaseFragment<V extends BaseView, P extends BasePresenter> extends Fragment {
 
     protected final String TAG = this.getClass().getSimpleName();
     protected P mPersenter;
@@ -88,14 +88,14 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter> 
     @Override
     public void startActivity(Intent intent) {
         super.startActivity(intent);
-        (getActivity()).overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+        (getActivity()).overridePendingTransition(com.lixiaomi.baselib.R.anim.in_from_right, com.lixiaomi.baselib.R.anim.out_to_left);
     }
 
 
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
         super.startActivityForResult(intent, requestCode);
-        (getActivity()).overridePendingTransition(R.anim.toleft, R.anim.infright);
+        (getActivity()).overridePendingTransition(com.lixiaomi.baselib.R.anim.toleft, com.lixiaomi.baselib.R.anim.infright);
     }
 
     /**
@@ -103,7 +103,7 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter> 
      */
     protected void showLoading() {
         try {
-            XiaomiLoader.showLoading(getActivity(), getResources().getColor(R.color.default_color));
+            XiaomiLoader.showLoading(getActivity(), getResources().getColor(com.lixiaomi.baselib.R.color.default_color));
         } catch (Exception e) {
             e.printStackTrace();
         }

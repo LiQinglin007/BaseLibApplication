@@ -10,12 +10,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-
-
-import com.lixiaomi.baselib.base.BasePresenter;
 import com.lixiaomi.baselibapplication.R;
 import com.lixiaomi.baselibapplication.adapter.TestRecyclerAdapter;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseActivity;
+import com.lixiaomi.mvplib.base.BasePresenter;
 
 import java.util.ArrayList;
 

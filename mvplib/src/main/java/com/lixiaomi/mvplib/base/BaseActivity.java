@@ -1,4 +1,4 @@
-package com.lixiaomi.baselib.base;
+package com.lixiaomi.mvplib.base;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,9 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.gyf.barlibrary.ImmersionBar;
-import com.lixiaomi.baselib.R;
 import com.lixiaomi.baselib.ui.Loading.LoaderStyle;
 import com.lixiaomi.baselib.ui.Loading.XiaomiLoader;
+import com.lixiaomi.baselib.utils.BaseAppManager;
+
 /**
  * @describe：MVP架构基础类<br>
  * @author：Xiaomi<br>
@@ -17,7 +18,7 @@ import com.lixiaomi.baselib.ui.Loading.XiaomiLoader;
  * @remarks：<br>
  * @changeTime:<br>
  */
-public abstract class BaseActivity<V extends BaseView, P extends BasePresenter> extends AppCompatActivity   {
+public abstract class BaseActivity<V extends BaseView, P extends BasePresenter> extends AppCompatActivity {
     protected final String TAG = this.getClass().getSimpleName();
     protected P mPersenter;
     /**
@@ -109,7 +110,7 @@ public abstract class BaseActivity<V extends BaseView, P extends BasePresenter> 
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        overridePendingTransition(R.anim.toleft, R.anim.infright);
+        overridePendingTransition(com.lixiaomi.baselib.R.anim.toleft, com.lixiaomi.baselib.R.anim.infright);
     }
 
     /**
@@ -120,14 +121,14 @@ public abstract class BaseActivity<V extends BaseView, P extends BasePresenter> 
     @Override
     public void startActivity(Intent intent) {
         super.startActivity(intent);
-        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+        overridePendingTransition(com.lixiaomi.baselib.R.anim.in_from_right, com.lixiaomi.baselib.R.anim.out_to_left);
     }
 
 
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
         super.startActivityForResult(intent, requestCode);
-        overridePendingTransition(R.anim.toleft, R.anim.infright);
+        overridePendingTransition(com.lixiaomi.baselib.R.anim.toleft, com.lixiaomi.baselib.R.anim.infright);
     }
 
     /**
@@ -135,7 +136,7 @@ public abstract class BaseActivity<V extends BaseView, P extends BasePresenter> 
      */
     protected void showLoading() {
         try {
-            XiaomiLoader.showLoading(this, getResources().getColor(R.color.default_color));
+            XiaomiLoader.showLoading(this, getResources().getColor(com.lixiaomi.baselib.R.color.default_color));
         } catch (Exception e) {
             e.printStackTrace();
         }

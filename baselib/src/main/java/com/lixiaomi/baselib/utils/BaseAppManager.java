@@ -39,7 +39,7 @@
 //
 //                  佛祖保佑                 永无BUG
 
-package com.lixiaomi.baselib.base;
+package com.lixiaomi.baselib.utils;
 
 import android.app.Activity;
 

@@ -4,12 +4,11 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
-
-import com.lixiaomi.baselib.base.BasePresenter;
 import com.lixiaomi.baselib.utils.LogUtils;
 import com.lixiaomi.baselibapplication.R;
 import com.lixiaomi.baselibapplication.adapter.TestViewPagerAdapter1;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseActivity;
+import com.lixiaomi.mvplib.base.BasePresenter;
 
 import java.util.ArrayList;
 

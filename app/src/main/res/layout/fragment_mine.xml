@@ -190,6 +190,13 @@
                 android:id="@+id/mine_permission"
                 style="@style/fragment_mine_tv"
                 android:text="申请权限" />
+
+            <include layout="@layout/include_line"></include>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mine_download"
+                style="@style/fragment_mine_tv"
+                android:text="下载文件" />
         </LinearLayout>
     </ScrollView>
 

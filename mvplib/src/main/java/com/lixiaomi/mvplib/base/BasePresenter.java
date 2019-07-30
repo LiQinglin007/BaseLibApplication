@@ -1,4 +1,4 @@
-package com.lixiaomi.baselib.base;
+package com.lixiaomi.mvplib.base;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;

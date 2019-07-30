@@ -1,7 +1,7 @@
 package com.lixiaomi.baselibapplication.model;
 
 
-import com.lixiaomi.baselib.base.MyPresenterCallBack;
+import com.lixiaomi.mvplib.base.MyPresenterCallBack;
 
 /**
  * @describe：<br>

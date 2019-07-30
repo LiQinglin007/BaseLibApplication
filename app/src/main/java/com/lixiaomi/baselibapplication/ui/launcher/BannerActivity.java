@@ -10,11 +10,12 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.bigkoo.convenientbanner.listener.OnPageChangeListener;
-import com.lixiaomi.baselib.base.BasePresenter;
+
 import com.lixiaomi.baselib.utils.LogUtils;
 import com.lixiaomi.baselibapplication.R;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseActivity;
 import com.lixiaomi.baselibapplication.ui.main.MainActivity;
+import com.lixiaomi.mvplib.base.BasePresenter;
 
 
 import java.util.ArrayList;

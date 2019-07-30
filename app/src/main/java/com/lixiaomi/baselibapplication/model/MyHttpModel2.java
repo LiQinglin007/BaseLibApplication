@@ -1,13 +1,13 @@
 package com.lixiaomi.baselibapplication.model;
 
 import com.google.gson.Gson;
-import com.lixiaomi.baselib.base.MyPresenterCallBack;
 import com.lixiaomi.baselib.net.okhttp.MiOkHttpCallBack;
 import com.lixiaomi.baselib.net.okhttp.MiSendRequestOkHttp;
 import com.lixiaomi.baselib.utils.LogUtils;
 import com.lixiaomi.baselibapplication.bean.SendUserLoginBean;
 import com.lixiaomi.baselibapplication.http.HttpUtils;
 import com.lixiaomi.baselibapplication.utils.aes_rsa_utils.AESUtil;
+import com.lixiaomi.mvplib.base.MyPresenterCallBack;
 
 
 /**

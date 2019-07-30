@@ -1,4 +1,4 @@
-package com.lixiaomi.baselib.base;
+package com.lixiaomi.mvplib.base;
 
 /**
  * @describe：model请求后的回调<br>

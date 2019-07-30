@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.lixiaomi.baselib.base.BasePresenter;
 import com.lixiaomi.baselib.ui.dialog.MiDialog;
 import com.lixiaomi.baselib.ui.dialog.MiPremissionDialog;
 import com.lixiaomi.baselib.utils.LogUtils;
@@ -25,6 +24,7 @@ import com.lixiaomi.baselibapplication.adapter.WifiListAdapter;
 import com.lixiaomi.baselibapplication.bean.ScanResultBean;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseActivity;
 import com.lixiaomi.baselibapplication.utils.WifiSupport;
+import com.lixiaomi.mvplib.base.BasePresenter;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -6,13 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.lixiaomi.baselib.base.BasePresenter;
 import com.lixiaomi.baselib.utils.LogUtils;
 import com.lixiaomi.baselibapplication.R;
 import com.lixiaomi.baselibapplication.message.TcpMessage;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseActivity;
 import com.lixiaomi.baselibapplication.utils.tcp.TcpServer;
+import com.lixiaomi.mvplib.base.BasePresenter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

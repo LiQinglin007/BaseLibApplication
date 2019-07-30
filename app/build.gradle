@@ -38,5 +38,7 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     implementation files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
     implementation 'commons-codec:commons-codec:1.11'
-    implementation project(path: ':baselib')
+//    api "com.lixiaomi:mvplib:1.0.0"
+    api 'com.lixiaomi.mvp:mvplib:1.0.0'
+//    implementation project(path: ':mvplib')
 }

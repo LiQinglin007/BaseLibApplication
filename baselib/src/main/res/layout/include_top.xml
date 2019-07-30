@@ -42,14 +42,16 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:paddingLeft="@dimen/px_30"
-        android:paddingRight="@dimen/px_15">
+        android:paddingLeft="@dimen/px_15"
+        android:paddingRight="@dimen/px_30">
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/top_add_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:src="@drawable/icon_save"
+            android:visibility="gone"
+            />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/top_save_tv"
@@ -57,6 +59,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="保存"
+            android:visibility="gone"
             android:textColor="@color/color_white"
             android:textSize="@dimen/px_30" />
     </android.support.v7.widget.LinearLayoutCompat>

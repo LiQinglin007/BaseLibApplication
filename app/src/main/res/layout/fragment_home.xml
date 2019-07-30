@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.li.xiaomi.xiaomilibtest.ui.main.MainActivity">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
@@ -12,6 +11,11 @@
         android:gravity="center"
         android:text="当前页内容不是依赖库中的内容"
         android:textSize="@dimen/px_36" />
+
+    <ImageView
+        android:id="@+id/test_img"
+        android:layout_width="@dimen/px_240"
+        android:layout_height="@dimen/px_240" />
 
     <ScrollView
         android:layout_width="match_parent"

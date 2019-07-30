@@ -1,4 +1,4 @@
-package com.lixiaomi.baselib.ui.bottom;
+package com.lixiaomi.mvplib.bottom;
 
 /**
  * @describe：底部菜单<br>

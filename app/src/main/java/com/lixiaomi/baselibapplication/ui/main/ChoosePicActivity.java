@@ -9,11 +9,12 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Toast;
 
-import com.lixiaomi.baselib.base.BasePresenter;
+
 import com.lixiaomi.baselib.ui.dialog.MiPremissionDialog;
 import com.lixiaomi.baselib.utils.FileUtil;
 import com.lixiaomi.baselibapplication.R;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseActivity;
+import com.lixiaomi.mvplib.base.BasePresenter;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -16,11 +16,12 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.lixiaomi.baselib.base.BasePresenter;
+
 import com.lixiaomi.baselibapplication.R;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseActivity;
 import com.lixiaomi.baselibapplication.utils.MPAdnroidChartUtils.BarLineChartManager;
 import com.lixiaomi.baselibapplication.utils.MPAdnroidChartUtils.PieRadarChartManager;
+import com.lixiaomi.mvplib.base.BasePresenter;
 
 import java.util.ArrayList;
 import java.util.Arrays;

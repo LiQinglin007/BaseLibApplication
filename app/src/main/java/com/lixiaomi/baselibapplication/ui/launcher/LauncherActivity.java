@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
-import com.lixiaomi.baselib.base.BasePresenter;
+
 import com.lixiaomi.baselib.utils.MiFinalData;
 import com.lixiaomi.baselib.utils.PreferenceUtils;
 import com.lixiaomi.baselib.utils.timer.BaseTimerTask;
@@ -13,6 +13,7 @@ import com.lixiaomi.baselib.utils.timer.ITimerListener;
 import com.lixiaomi.baselibapplication.R;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseActivity;
 import com.lixiaomi.baselibapplication.ui.main.MainActivity;
+import com.lixiaomi.mvplib.base.BasePresenter;
 
 import java.text.MessageFormat;
 import java.util.Timer;

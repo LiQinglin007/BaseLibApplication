@@ -1,4 +1,4 @@
-package com.lixiaomi.baselib.ui.bottom;
+package com.lixiaomi.mvplib.bottom;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,9 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
-import com.lixiaomi.baselib.R;
-import com.lixiaomi.baselib.base.BaseActivity;
 import com.lixiaomi.baselib.utils.CheckStringEmptyUtils;
+import com.lixiaomi.mvplib.R;
+import com.lixiaomi.mvplib.base.BaseActivity;
+
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

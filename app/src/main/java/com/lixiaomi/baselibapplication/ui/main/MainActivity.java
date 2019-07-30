@@ -3,16 +3,18 @@ package com.lixiaomi.baselibapplication.ui.main;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
-import com.lixiaomi.baselib.base.BaseAppManager;
-import com.lixiaomi.baselib.base.BasePresenter;
+import com.lixiaomi.baselib.utils.BaseAppManager;
+
 import com.lixiaomi.baselib.eventmessage.MiEventMessage;
-import com.lixiaomi.baselib.ui.bottom.BaseBottomActivity;
-import com.lixiaomi.baselib.ui.bottom.BottomTabBean;
 import com.lixiaomi.baselib.utils.MiFinalData;
 import com.lixiaomi.baselib.utils.PreferenceUtils;
 import com.lixiaomi.baselib.utils.T;
 import com.lixiaomi.baselibapplication.R;
+
 import com.lixiaomi.baselibapplication.ui.mDesign.TabLayoutActivity;
+import com.lixiaomi.mvplib.base.BasePresenter;
+import com.lixiaomi.mvplib.bottom.BaseBottomActivity;
+import com.lixiaomi.mvplib.bottom.BottomTabBean;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

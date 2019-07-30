@@ -5,12 +5,10 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-
-import com.lixiaomi.baselib.base.BasePresenter;
 import com.lixiaomi.baselib.utils.LogUtils;
 import com.lixiaomi.baselibapplication.adapter.TestRecyclerAdapter;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseFragment;
+import com.lixiaomi.mvplib.base.BasePresenter;
 
 import java.util.ArrayList;
 

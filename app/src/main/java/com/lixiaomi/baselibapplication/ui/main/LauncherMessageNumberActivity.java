@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.lixiaomi.baselib.base.BasePresenter;
+
 import com.lixiaomi.baselib.utils.MiRandomUtils;
 import com.lixiaomi.baselibapplication.R;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseActivity;
 import com.lixiaomi.baselibapplication.utils.NotificationUtil;
+import com.lixiaomi.mvplib.base.BasePresenter;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
 

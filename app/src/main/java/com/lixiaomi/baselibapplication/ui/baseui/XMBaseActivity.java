@@ -1,7 +1,9 @@
 package com.lixiaomi.baselibapplication.ui.baseui;
-import com.lixiaomi.baselib.base.BaseActivity;
-import com.lixiaomi.baselib.base.BasePresenter;
-import com.lixiaomi.baselib.base.BaseView;
+
+
+import com.lixiaomi.mvplib.base.BaseActivity;
+import com.lixiaomi.mvplib.base.BasePresenter;
+import com.lixiaomi.mvplib.base.BaseView;
 
 /**
  * @describe：自己项目里要加的东西<br>
