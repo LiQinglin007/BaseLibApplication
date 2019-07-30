@@ -12,7 +12,7 @@ allprojects {
 ```
 ### 2、添加依赖和配置
 ```
-api 'com.lixiaomi:baselib:1.0.4'
+api 'com.lixiaomi:baselib:1.0.3'
 ```
 ### 3、相关权限
 ```
@@ -35,14 +35,11 @@ api 'com.lixiaomi:baselib:1.0.4'
     
 ```
 
-
+### 4、使用文档
+[传送门](https://github.com/LiQinglin007/BaseLibApplication/blob/master/doc/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3.md)
   
 
-
 ## 重要更新说明
-### v1.0.4 更新  2019-7-26
-#### 增加功能
- * 更新inculde文件到mvpBase包
 ### v1.0.3 更新  2019-7-26
 #### 增加功能
  * 删除Base包及basebottom包;两个包将放在新的mvpbaseLib中.
