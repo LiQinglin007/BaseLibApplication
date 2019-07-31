@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/top_ly"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/px_96"
+    android:background="@color/default_color"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/px_10"
+    android:paddingBottom="@dimen/px_10">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/top_back_ly"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_15">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/top_back_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_back" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/top_title_tv"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/px_36"
+        tools:text="标题" />
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/top_right_ly"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingLeft="@dimen/px_15"
+        android:paddingRight="@dimen/px_30">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/top_add_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_save"
+            android:visibility="gone"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/top_save_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="保存"
+            android:visibility="gone"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/px_30" />
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</android.support.v7.widget.LinearLayoutCompat>

@@ -65,14 +65,14 @@ public abstract class BaseBottomActivity extends BaseActivity implements View.On
     public abstract int setChooseIndex();
 
     /**
-     * 设置选中的原色
+     * 设置选中的颜色
      *
      * @return
      */
     public abstract int setClickedColor();
 
     /**
-     * 设置未选中的原色
+     * 设置未选中的颜色
      *
      * @return
      */

@@ -99,10 +99,16 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter> 
     }
 
     /**
+     * 正在发起请求的数量，用来控制loading
+     */
+    private int mLoadingNumber = 0;
+
+    /**
      * 显示loading
      */
     protected void showLoading() {
         try {
+            mLoadingNumber++;
             XiaomiLoader.showLoading(getActivity(), getResources().getColor(com.lixiaomi.baselib.R.color.default_color));
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,6 +123,7 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter> 
      */
     protected void showLoading(int color, Enum<LoaderStyle> loaderStyle) {
         try {
+            mLoadingNumber++;
             XiaomiLoader.showLoading(getActivity(), getResources().getColor(color), loaderStyle);
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,7 +134,10 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter> 
      * 隐藏loading
      */
     protected void hineLoading() {
-        XiaomiLoader.stopLoading();
+        mLoadingNumber--;
+        if (mLoadingNumber == 0) {
+            XiaomiLoader.stopLoading();
+        }
     }
 
     @Override

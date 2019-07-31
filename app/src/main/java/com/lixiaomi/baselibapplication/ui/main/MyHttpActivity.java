@@ -126,4 +126,9 @@ public class MyHttpActivity extends XMBaseActivity<IMyHttpActivity, MyHttpPersen
     public void stopLoading() {
         hineLoading();
     }
+
+    @Override
+    public void showToast(String msg) {
+
+    }
 }

@@ -33,6 +33,11 @@ public class MyHttpPersenter extends BasePresenter<IMyHttpActivity, BaseModel> i
             }
 
             @Override
+            public void error(String message) {
+
+            }
+
+            @Override
             public void failure(Throwable e) {
                 view.setData(-100, e.toString());
                 view.stopLoading();
@@ -50,6 +55,11 @@ public class MyHttpPersenter extends BasePresenter<IMyHttpActivity, BaseModel> i
             public void success(int code, String response) {
                 view.setData(code, response);
                 view.stopLoading();
+            }
+
+            @Override
+            public void error(String message) {
+
             }
 
             @Override

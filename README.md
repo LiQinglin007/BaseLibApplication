@@ -40,6 +40,9 @@ api 'com.lixiaomi:baselib:1.0.3'
   
 
 ## 重要更新说明
+### v1.0.5 更新  2019-7-31
+#### 更新
+ * 修改ui/XiaomiLoader，优化Loading显示
 ### v1.0.3 更新  2019-7-26
 #### 增加功能
  * 删除Base包及basebottom包;两个包将放在新的mvpbaseLib中.

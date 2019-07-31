@@ -18,4 +18,11 @@ public interface BaseView {
      * 关闭加载动画
      */
     void stopLoading();
+
+    /**
+     * 显示toast
+     *
+     * @param msg
+     */
+    void showToast(String msg);
 }
