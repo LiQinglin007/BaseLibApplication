@@ -14,7 +14,6 @@ import com.lixiaomi.baselib.utils.CheckStringEmptyUtils;
 import com.lixiaomi.mvplib.R;
 import com.lixiaomi.mvplib.base.BaseActivity;
 
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -85,6 +84,10 @@ public abstract class BaseBottomActivity extends BaseActivity implements View.On
      */
     public abstract int setBackGroundColor();
 
+    /**
+     * 初始化完成  去做一些事情
+     */
+    protected abstract void initCompletion();
 
     /**
      * 底部按钮的点击接口，<br>
@@ -167,12 +170,6 @@ public abstract class BaseBottomActivity extends BaseActivity implements View.On
         initCompletion();
         switchFragment();
     }
-
-    /**
-     * 初始化完成  去做一些事情
-     */
-    protected abstract void initCompletion();
-
 
     /**
      * 还原颜色

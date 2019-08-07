@@ -25,10 +25,11 @@ android {
 
 
 ext {
-    baseLib = "1.0.5"
+    baseLib = "1.0.6"
 }
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    api "com.lixiaomi:baselib:$baseLib"
+//    api "com.lixiaomi:baselib:$baseLib"
+    api project(path: ':baselib')
 }
