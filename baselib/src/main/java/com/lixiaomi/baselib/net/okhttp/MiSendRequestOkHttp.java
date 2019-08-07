@@ -36,10 +36,10 @@ public final class MiSendRequestOkHttp {
     /**
      * 发送get请求同步请求
      *
-     * @param heads        请求头
-     * @param params       请求参数
-     * @param url          请求地址
-     * @param cacheTime   缓存时间(s)
+     * @param heads     请求头
+     * @param params    请求参数
+     * @param url       请求地址
+     * @param cacheTime 缓存时间(s)
      */
     public static Response sendGetSync(WeakHashMap<String, String> heads, WeakHashMap<String, Object> params, String url, int cacheTime) throws IOException {
         StringBuilder sendUrl = new StringBuilder(url);
@@ -64,10 +64,10 @@ public final class MiSendRequestOkHttp {
     /**
      * 发送post同步请求，参数发送
      *
-     * @param heads        请求头
-     * @param params       请求参数
-     * @param url          请求地址
-     * @param cacheTime   缓存时间(s)
+     * @param heads     请求头
+     * @param params    请求参数
+     * @param url       请求地址
+     * @param cacheTime 缓存时间(s)
      */
     public static Response sendPostSync(WeakHashMap<String, String> heads, WeakHashMap<String, String> params, String url, int cacheTime) throws IOException {
         FormBody.Builder formBodyBuilder = new FormBody.Builder();
@@ -84,10 +84,10 @@ public final class MiSendRequestOkHttp {
     /**
      * 发送post同步请求
      *
-     * @param heads        请求头
-     * @param mSendBean    请求对象
-     * @param url          请求地址
-     * @param cacheTime   缓存时间(s)
+     * @param heads     请求头
+     * @param mSendBean 请求对象
+     * @param url       请求地址
+     * @param cacheTime 缓存时间(s)
      */
     public static Response sendPostSync(WeakHashMap<String, String> heads, Object mSendBean, String url, int cacheTime) throws IOException {
         //创建json请求体
@@ -103,10 +103,10 @@ public final class MiSendRequestOkHttp {
     /**
      * 发送Post同步请求
      *
-     * @param heads        请求头
-     * @param mSendJson    json格式请求内容
-     * @param url          请求地址
-     * @param cacheTime   缓存时间(s)
+     * @param heads     请求头
+     * @param mSendJson json格式请求内容
+     * @param url       请求地址
+     * @param cacheTime 缓存时间(s)
      */
     public static Response sendPostSync(WeakHashMap<String, String> heads, String mSendJson, String url, int cacheTime) throws IOException {
         //创建json请求体
@@ -169,11 +169,11 @@ public final class MiSendRequestOkHttp {
     /**
      * 发送get请求异步请求
      *
-     * @param heads        请求头
-     * @param params       请求参数
-     * @param url          请求地址
-     * @param cacheTime   缓存时间(s)
-     * @param myCallBack   回调
+     * @param heads      请求头
+     * @param params     请求参数
+     * @param url        请求地址
+     * @param cacheTime  缓存时间(s)
+     * @param myCallBack 回调
      */
     public static void sendGet(WeakHashMap<String, String> heads, WeakHashMap<String, Object> params, String url, int cacheTime, MiOkHttpCallBack myCallBack) {
         StringBuilder sendUrl = new StringBuilder(url);
@@ -198,14 +198,14 @@ public final class MiSendRequestOkHttp {
     /**
      * 文件和post一起上传
      *
-     * @param heads        请求头，可为空
-     * @param params       参数  可为空
-     * @param fileList     上传文件 可为空 键值对  键为web端的表单域；图片名称
-     * @param url          请求地址
-     * @param myCallBack   请求回调
+     * @param heads      请求头，可为空
+     * @param params     参数  可为空
+     * @param fileList   上传文件 可为空 键值对  键为web端的表单域；图片名称
+     * @param url        请求地址
+     * @param myCallBack 请求回调
      */
     public static void sendPost(WeakHashMap<String, String> heads, WeakHashMap<String, String> params, WeakHashMap<String, File> fileList,
-                                String url,  MiOkHttpCallBack myCallBack) {
+                                String url, MiOkHttpCallBack myCallBack) {
         MultipartBody.Builder multipartBody = new MultipartBody.Builder();
         multipartBody.setType(MultipartBody.FORM);
         if (fileList != null && fileList.size() != 0) {
@@ -227,13 +227,13 @@ public final class MiSendRequestOkHttp {
     /**
      * 发送post请求，参数发送
      *
-     * @param heads        请求头
-     * @param params       请求参数
-     * @param url          请求地址
-     * @param cacheTime   缓存时间(s)
-     * @param myCallBack   回调
+     * @param heads      请求头
+     * @param params     请求参数
+     * @param url        请求地址
+     * @param cacheTime  缓存时间(s)
+     * @param myCallBack 回调
      */
-    public static void sendPost(WeakHashMap<String, String> heads, WeakHashMap<String, String> params, String url,  int cacheTime, MiOkHttpCallBack myCallBack) {
+    public static void sendPost(WeakHashMap<String, String> heads, WeakHashMap<String, String> params, String url, int cacheTime, MiOkHttpCallBack myCallBack) {
         FormBody.Builder formBodyBuilder = new FormBody.Builder();
         if (params != null && params.size() != 0) {
             for (WeakHashMap.Entry<String, String> map : params.entrySet()) {
@@ -248,13 +248,13 @@ public final class MiSendRequestOkHttp {
     /**
      * 发送post异步请求
      *
-     * @param heads        请求头
-     * @param mSendBean    请求对象
-     * @param url          请求地址
+     * @param heads       请求头
+     * @param mSendBean   请求对象
+     * @param url         请求地址
      * @param cacheTime   缓存时间(s)
-     * @param mOkCallBack  回调
+     * @param mOkCallBack 回调
      */
-    public static void sendPost(WeakHashMap<String, String> heads, Object mSendBean, String url,  int cacheTime, MiOkHttpCallBack mOkCallBack) {
+    public static void sendPost(WeakHashMap<String, String> heads, Object mSendBean, String url, int cacheTime, MiOkHttpCallBack mOkCallBack) {
         //创建json请求体
         if (null != mSendBean) {
             RequestBody jsonBody = RequestBody.create(MiHttpData.MEDIA_TYPE_JSON, MiJsonUtil.getJson(mSendBean));
@@ -268,13 +268,13 @@ public final class MiSendRequestOkHttp {
     /**
      * 发送Post异步请求
      *
-     * @param heads        请求头
-     * @param mSendJson    json格式请求内容
-     * @param url          请求地址
+     * @param heads       请求头
+     * @param mSendJson   json格式请求内容
+     * @param url         请求地址
      * @param cacheTime   缓存时间(s)
-     * @param mOkCallBack  回调
+     * @param mOkCallBack 回调
      */
-    public static void sendPost(WeakHashMap<String, String> heads, String mSendJson, String url,  int cacheTime, MiOkHttpCallBack mOkCallBack) {
+    public static void sendPost(WeakHashMap<String, String> heads, String mSendJson, String url, int cacheTime, MiOkHttpCallBack mOkCallBack) {
         //创建json请求体
         RequestBody jsonBody = RequestBody.create(MiHttpData.MEDIA_TYPE_JSON, mSendJson);
         LogUtils.logd(TAG, "请求参数:" + mSendJson);
@@ -285,11 +285,11 @@ public final class MiSendRequestOkHttp {
     /**
      * 异步请求发送方法
      *
-     * @param heads        请求头
-     * @param requestBody  请求体
-     * @param url          请求地址
+     * @param heads       请求头
+     * @param requestBody 请求体
+     * @param url         请求地址
      * @param cacheTime   缓存时间(s)
-     * @param myCallBack   回调
+     * @param myCallBack  回调
      */
     private static void okhttpSend(WeakHashMap<String, String> heads, RequestBody requestBody, String url, int cacheTime, MiOkHttpCallBack myCallBack) {
         //如果请求地址中包含“http://” 或者“ https://” 就认位是一个完整的请求地址，这里就不进行拼接了
@@ -346,6 +346,7 @@ public final class MiSendRequestOkHttp {
                 String tag = (String) call.request().tag();
                 if (url.equals(tag)) {
                     call.cancel();
+                    LogUtils.loge("取消请求：" + tag);
                 }
             }
         } catch (NullPointerException e) {

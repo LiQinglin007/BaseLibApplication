@@ -40,6 +40,9 @@ api 'com.lixiaomi:baselib:1.0.3'
   
 
 ## 重要更新说明
+### v1.0.6 更新  2019-8-7
+#### 更新
+ * 修改ui/XiaomiLoader，优化Loading显示
 ### v1.0.5 更新  2019-7-31
 #### 更新
  * 修改ui/XiaomiLoader，优化Loading显示

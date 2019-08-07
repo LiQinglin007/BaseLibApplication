@@ -164,7 +164,7 @@ public class MineFragment extends XMBaseFragment implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.mine_http:
-                showLoading(R.color.warning_color3, LoaderStyle.PacmanIndicator);
+
                 startActivity(new Intent(getActivity(), MyHttpActivity.class));
                 break;
             case R.id.mine_take_pic:

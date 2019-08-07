@@ -13,6 +13,7 @@ import com.lixiaomi.baselib.utils.timer.ITimerListener;
 import com.lixiaomi.baselibapplication.R;
 import com.lixiaomi.baselibapplication.ui.baseui.XMBaseActivity;
 import com.lixiaomi.baselibapplication.ui.main.MainActivity;
+import com.lixiaomi.baselibapplication.ui.main.MyHttpActivity;
 import com.lixiaomi.mvplib.base.BasePresenter;
 
 import java.text.MessageFormat;
@@ -103,7 +104,7 @@ public class LauncherActivity extends XMBaseActivity implements ITimerListener, 
     private void checkIsShowScroll() {
         boolean aBoolean = PreferenceUtils.getBoolean(MiFinalData.IS_OPEN_APP, false);
         if (aBoolean) {
-            startActivity(new Intent(LauncherActivity.this, MainActivity.class));
+            startActivity(new Intent(LauncherActivity.this, MyHttpActivity.class));
         } else {
             startActivity(new Intent(LauncherActivity.this, BannerActivity.class));
         }

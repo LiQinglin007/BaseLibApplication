@@ -1,6 +1,7 @@
 package com.lixiaomi.baselib.ui.Loading;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatDialog;
 import android.view.Gravity;
 import android.view.Window;
@@ -22,10 +23,19 @@ public class XiaomiLoader {
     private static final int LOADER_OFFSET_SCALE = 10;
     private static AppCompatDialog mLoadingDialog;
     private static AVLoadingIndicatorView mAvLoadingIndicatorView;
+    private static int mLoadingNumebr = 0;
     /**
      * loading的默认样式
      */
     public static final LoaderStyle DEFAULT_LOADER = LoaderStyle.BallClipRotatePulseIndicator;
+
+    /**
+     * 初始化
+     */
+    public static void init() {
+        mLoadingNumebr = 0;
+        stopLoading();
+    }
 
     /**
      * 显示loading的dialog
@@ -34,28 +44,32 @@ public class XiaomiLoader {
      * @param loaderStyle 对话框的样式
      */
     public static void showLoading(Context context, int color, Enum<LoaderStyle> loaderStyle) throws IllegalAccessException, ClassNotFoundException, InstantiationException {
-        if (mLoadingDialog == null) {
-            mLoadingDialog = new AppCompatDialog(context, R.style.LoadingDialog);
-            if (mAvLoadingIndicatorView == null) {
-                mAvLoadingIndicatorView = LoaderCreator.create(loaderStyle.name(), context);
-            }
-            mAvLoadingIndicatorView.setIndicatorColor(color);
-            mLoadingDialog.setContentView(mAvLoadingIndicatorView);
-        }
-        if (mLoadingDialog.isShowing()) {
+        ++mLoadingNumebr;
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
             return;
         }
+        mLoadingDialog = new AppCompatDialog(context, R.style.LoadingDialog);
+        mAvLoadingIndicatorView = LoaderCreator.create(loaderStyle.name(), context);
+        mAvLoadingIndicatorView.setIndicatorColor(color);
+        mLoadingDialog.setContentView(mAvLoadingIndicatorView);
+
         int deviceWidth = ScreenUtils.getScreenWidth(context);
         int deviceHeight = ScreenUtils.getScreenHeight(context);
         final Window dialogWindow = mLoadingDialog.getWindow();
-        if (dialogWindow != null) {
-            final WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-            lp.width = deviceWidth / LOADER_SIZE_SCALE;
-            lp.height = deviceHeight / LOADER_SIZE_SCALE;
-            lp.height = lp.height + deviceHeight / LOADER_OFFSET_SCALE;
-            lp.gravity = Gravity.CENTER;
-        }
+
+        final WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        lp.width = deviceWidth / LOADER_SIZE_SCALE;
+        lp.height = deviceHeight / LOADER_SIZE_SCALE;
+        lp.height = lp.height + deviceHeight / LOADER_OFFSET_SCALE;
+        lp.gravity = Gravity.CENTER;
         mLoadingDialog.setCanceledOnTouchOutside(true);
+        mLoadingDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                mLoadingNumebr = 0;
+                stopLoading();
+            }
+        });
         mLoadingDialog.show();
     }
 
@@ -76,13 +90,15 @@ public class XiaomiLoader {
      * 停止
      */
     public static void stopLoading() {
-        if (mLoadingDialog != null) {
-            if (mLoadingDialog.isShowing()) {
-                if (mAvLoadingIndicatorView != null) {
-                    mAvLoadingIndicatorView.hide();
-                }
-                mLoadingDialog.hide();
+        --mLoadingNumebr;
+        if (mLoadingNumebr <= 0) {
+            mLoadingNumebr = 0;
+            if (mLoadingDialog != null) {
+                mAvLoadingIndicatorView = null;
+                mLoadingDialog.dismiss();
             }
         }
     }
+
+
 }

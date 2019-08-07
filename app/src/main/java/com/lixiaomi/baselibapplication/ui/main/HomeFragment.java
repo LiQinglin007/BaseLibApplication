@@ -98,13 +98,17 @@ public class HomeFragment extends XMBaseFragment implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.home_chart:
-                startActivity(new Intent(getActivity(), MPChartActivity.class));
+                showLoading();
+//                startActivity(new Intent(getActivity(), MPChartActivity.class));
                 break;
             case R.id.home_launcher:
-                startActivity(new Intent(getActivity(), LauncherMessageNumberActivity.class));
+                showLoading();
+                showLoading();
+//                startActivity(new Intent(getActivity(), LauncherMessageNumberActivity.class));
                 break;
             case R.id.home_recycler:
-                startActivity(new Intent(getActivity(), ExRecyclerActivity.class));
+                hineLoading();
+//                startActivity(new Intent(getActivity(), ExRecyclerActivity.class));
                 break;
             case R.id.home_pdf:
                 startActivity(new Intent(getActivity(), PDFActivity.class));
