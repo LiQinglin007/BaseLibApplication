@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.lixiaomi.baselib.R;
 import com.lixiaomi.baselib.utils.ScreenUtils;
+import com.lixiaomi.baselib.utils.T;
 import com.lixiaomi.baselib.utils.recycler.OnItemClickListener;
 
 import java.util.ArrayList;

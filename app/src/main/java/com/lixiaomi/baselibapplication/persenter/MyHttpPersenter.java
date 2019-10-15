@@ -6,7 +6,8 @@ import com.lixiaomi.baselibapplication.model.MyHttpModel2;
 import com.lixiaomi.baselibapplication.ui.main.IMyHttpActivity;
 import com.lixiaomi.mvplib.base.BaseModel;
 import com.lixiaomi.mvplib.base.BasePresenter;
-import com.lixiaomi.mvplib.base.MyPresenterCallBack;
+import com.lixiaomi.mvplib.base.BasePresenterCallBack;
+import com.lixiaomi.mvplib.base.MiPersenterCallBack;
 
 import java.util.ArrayList;
 
@@ -25,22 +26,10 @@ public class MyHttpPersenter extends BasePresenter<IMyHttpActivity, BaseModel> i
         final IMyHttpActivity view = getView();
         view.startLoading();
         ArrayList<BaseModel> models = getModelList();
-        ((MyHttpModel) models.get(0)).login(loginName, password, new MyPresenterCallBack() {
+        ((MyHttpModel) models.get(0)).login(loginName, password, new MiPersenterCallBack(view) {
             @Override
-            public void success(int code, String response) {
-                view.setData(code, response);
-
-            }
-
-            @Override
-            public void error(String message) {
-
-            }
-
-            @Override
-            public void failure(Throwable e) {
-                view.setData(-100, e.toString());
-
+            public void success(String response) {
+                view.setData(response);
             }
         });
     }
@@ -50,22 +39,10 @@ public class MyHttpPersenter extends BasePresenter<IMyHttpActivity, BaseModel> i
         final IMyHttpActivity view = getView();
         view.startLoading();
         ArrayList<BaseModel> models = getModelList();
-        ((MyHttpModel2) models.get(1)).login(new MyPresenterCallBack() {
+        ((MyHttpModel2) models.get(1)).login(new MiPersenterCallBack(view) {
             @Override
-            public void success(int code, String response) {
-                view.setData(code, response);
-
-            }
-
-            @Override
-            public void error(String message) {
-
-            }
-
-            @Override
-            public void failure(Throwable e) {
-                view.setData(-100, e.toString());
-
+            public void success(String response) {
+                view.setData(response);
             }
         });
     }

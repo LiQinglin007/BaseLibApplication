@@ -16,7 +16,7 @@ import okhttp3.Response;
  * @remarks：<br>
  * @changeTime:<br>
  */
-public abstract class MiOkHttpCallBack implements Callback {
+public abstract class BaseOkHttpCallBack implements Callback {
 
     Handler handler = new Handler(Looper.getMainLooper());
 
@@ -31,18 +31,18 @@ public abstract class MiOkHttpCallBack implements Callback {
     }
 
     @Override
-    public void onResponse(Call call, final Response response) throws IOException {
+    public void onResponse(final Call call, final Response response) throws IOException {
         final String str = response.body().string();
         handler.post(new Runnable() {
             @Override
             public void run() {
-                onSuccess(response.code(), str);
+                onSuccess(response.code(), call.request().url().toString(), str);
             }
         });
     }
 
 
-    public abstract void onSuccess(int code, String response);
+    public abstract void onSuccess(int code, String url, String response);
 
     public abstract void onFailure(Throwable e);
 

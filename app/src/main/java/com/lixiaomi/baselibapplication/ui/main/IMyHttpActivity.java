@@ -12,5 +12,5 @@ import com.lixiaomi.mvplib.base.BaseView;
 
 public interface IMyHttpActivity extends BaseView {
 
-    void setData(int code, String response);
+    void setData(String response);
 }

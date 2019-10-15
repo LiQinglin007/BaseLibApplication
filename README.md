@@ -40,6 +40,9 @@ api 'com.lixiaomi:baselib:1.0.3'
   
 
 ## 重要更新说明
+### v1.0.7 更新  2019-10-14
+#### 更新
+ * 添加net/HttpConfig类，用于配置网络模块参数
 ### v1.0.6 更新  2019-8-7
 #### 更新
  * 修改ui/XiaomiLoader，优化Loading显示

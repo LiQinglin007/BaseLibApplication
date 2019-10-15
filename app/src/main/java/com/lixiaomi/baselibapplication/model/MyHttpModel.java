@@ -1,7 +1,6 @@
 package com.lixiaomi.baselibapplication.model;
 
-
-import com.lixiaomi.mvplib.base.MyPresenterCallBack;
+import com.lixiaomi.mvplib.base.BasePresenterCallBack;
 
 /**
  * @describe：<br>
@@ -13,7 +12,7 @@ import com.lixiaomi.mvplib.base.MyPresenterCallBack;
 public class MyHttpModel implements IMyHttpModel {
 
     @Override
-    public void login(String loginName, String password, final MyPresenterCallBack myPresenterCallBack) {
-        myPresenterCallBack.success(200, "111111111111111111111111111");
+    public void login(String loginName, String password, final BasePresenterCallBack myPresenterCallBack) {
+        myPresenterCallBack.success("111111");
     }
 }

@@ -1,7 +1,8 @@
 package com.lixiaomi.baselibapplication.model;
 
 import com.lixiaomi.mvplib.base.BaseModel;
-import com.lixiaomi.mvplib.base.MyPresenterCallBack;
+import com.lixiaomi.mvplib.base.BasePresenterCallBack;
+import com.lixiaomi.mvplib.base.MiHttpCallBack;
 
 /**
  * @describe：<br>
@@ -18,6 +19,6 @@ public interface IMyHttpModel extends BaseModel {
      * @param password
      * @return
      */
-    void login(String loginName, String password, MyPresenterCallBack myPresenterCallBack);
+    void login(String loginName, String password, BasePresenterCallBack myPresenterCallBack);
 
 }

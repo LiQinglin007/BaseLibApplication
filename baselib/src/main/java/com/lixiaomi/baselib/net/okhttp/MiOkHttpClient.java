@@ -3,6 +3,7 @@ package com.lixiaomi.baselib.net.okhttp;
 
 import com.lixiaomi.baselib.config.AppConfigInIt;
 import com.lixiaomi.baselib.config.AppConfigType;
+import com.lixiaomi.baselib.net.HttpConfig;
 import com.lixiaomi.baselib.utils.FileUtil;
 import com.lixiaomi.baselib.utils.LogUtils;
 
@@ -51,11 +52,13 @@ public final class MiOkHttpClient {
     }
 
     private static final class OkHttpHolder {
-        private final static OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
-        private static final ArrayList<Interceptor> INTERCEPTORS = AppConfigInIt.getConfiguration(AppConfigType.HTTP_INTERCEPTOR);
-        private static final ArrayList<Interceptor> NETWORK_INTERCEPTORS = AppConfigInIt.getConfiguration(AppConfigType.HTTP_INTERCEPTOR);
-        private static final Boolean HTTP_RETRY_CONNECTION = AppConfigInIt.getConfiguration(AppConfigType.HTTP_RETRY_CONNECTION);
+        private static HttpConfig httpConfigData;
 
+        static {
+            httpConfigData = AppConfigInIt.getConfiguration(AppConfigType.HTTP_CONFIG);
+        }
+
+        private final static OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
         private final static long CONNECT_TIME_OUT = 20;
         private final static long WRITE_TIME_OUT = 20;
         private final static long READ_TIME_OUT = 20;
@@ -67,14 +70,16 @@ public final class MiOkHttpClient {
          */
         private static OkHttpClient.Builder addInterceptors() {
             //应用拦截器
-            if (INTERCEPTORS != null && !INTERCEPTORS.isEmpty()) {
-                for (Interceptor interceptor : INTERCEPTORS) {
+            ArrayList<Interceptor> http_interceptor = httpConfigData.getHTTP_INTERCEPTOR();
+            ArrayList<Interceptor> http_network_interceptor = httpConfigData.getHTTP_NETWORK_INTERCEPTOR();
+            if (http_interceptor != null && !http_interceptor.isEmpty()) {
+                for (Interceptor interceptor : http_interceptor) {
                     BUILDER.addInterceptor(interceptor);
                 }
             }
             //网络拦截器
-            if (NETWORK_INTERCEPTORS != null && !NETWORK_INTERCEPTORS.isEmpty()) {
-                for (Interceptor interceptor : NETWORK_INTERCEPTORS) {
+            if (http_network_interceptor != null && !http_network_interceptor.isEmpty()) {
+                for (Interceptor interceptor : http_network_interceptor) {
                     BUILDER.addNetworkInterceptor(interceptor);
                 }
             }
@@ -109,7 +114,7 @@ public final class MiOkHttpClient {
                         //写入超时
                         .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
                         //链接失败后是否重试默认为true
-                        .retryOnConnectionFailure(HTTP_RETRY_CONNECTION == null ? true : HTTP_RETRY_CONNECTION)
+                        .retryOnConnectionFailure(httpConfigData.getHTTP_RETRY_CONNECTION())
                         //设置使用缓存
                         .cache(cache)
                         .build();
@@ -137,14 +142,20 @@ public final class MiOkHttpClient {
      * @return
      */
     public static class TrustAllCerts implements X509TrustManager {
+        private static HttpConfig httpConfigData;
+
+        static {
+            httpConfigData = AppConfigInIt.getConfiguration(AppConfigType.HTTP_CONFIG);
+        }
+
         @Override
         public void checkClientTrusted(X509Certificate[] chain, String authType) {
         }
 
         @Override
         public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-            boolean configurationFlag = AppConfigInIt.getConfiguration(AppConfigType.HTTP_CERTIFICATE_FLAG);
-            InputStream configurationInput = AppConfigInIt.getConfiguration(AppConfigType.HTTP_CERTIFICATE_INPUT);
+            boolean configurationFlag = httpConfigData.getHTTP_CERTIFICATE_FLAG();
+            InputStream configurationInput = httpConfigData.getHTTP_CERTIFICATE_INPUT();
             if (configurationFlag || configurationInput == null) {
                 //信任所有证书
                 LogUtils.logd("信任所有证书");

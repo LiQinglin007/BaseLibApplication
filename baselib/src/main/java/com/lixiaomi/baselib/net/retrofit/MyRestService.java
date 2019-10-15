@@ -2,6 +2,7 @@ package com.lixiaomi.baselib.net.retrofit;
 
 import com.lixiaomi.baselib.config.AppConfigInIt;
 import com.lixiaomi.baselib.config.AppConfigType;
+import com.lixiaomi.baselib.net.HttpConfig;
 import com.lixiaomi.baselib.net.okhttp.MiOkHttpClient;
 
 import retrofit2.Retrofit;
@@ -31,7 +32,7 @@ public final class MyRestService {
     }
 
     private static final class RetrofitHolder {
-        private static final String BASE_URL = AppConfigInIt.getConfiguration(AppConfigType.HTTP_BASE_API);
+        private static final String BASE_URL = ((HttpConfig) AppConfigInIt.getConfiguration(AppConfigType.HTTP_CONFIG)).getHTTP_BASE_API();
         private static final Retrofit RETROFIT_CLIENT = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(MiOkHttpClient.getOkHttpClient())

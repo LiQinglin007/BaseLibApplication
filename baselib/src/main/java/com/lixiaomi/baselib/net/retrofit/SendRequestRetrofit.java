@@ -4,7 +4,8 @@ package com.lixiaomi.baselib.net.retrofit;
 import com.google.gson.Gson;
 import com.lixiaomi.baselib.config.AppConfigInIt;
 import com.lixiaomi.baselib.config.AppConfigType;
-import com.lixiaomi.baselib.net.MiHttpData;
+import com.lixiaomi.baselib.net.HttpConfig;
+import com.lixiaomi.baselib.net.MiHttpMediaType;
 import com.lixiaomi.baselib.net.okhttp.MiOkHttpClient;
 
 import java.io.File;
@@ -143,7 +144,7 @@ public final class SendRequestRetrofit {
     public static void sendPost(WeakHashMap<String, String> heads, Object mSendBean, String url, MyRetrofitCallBack myCallBack) {
         Call<String> call = null;
         RestService restService = MyRestService.getRestService();
-        RequestBody mRequestBody = RequestBody.create(MiHttpData.MEDIA_TYPE_JSON, new Gson().toJson(mSendBean));
+        RequestBody mRequestBody = RequestBody.create(MiHttpMediaType.MEDIA_TYPE_JSON, new Gson().toJson(mSendBean));
         if (heads != null) {
             call = restService.postBody(heads, url, mRequestBody);
         } else {
@@ -187,7 +188,7 @@ public final class SendRequestRetrofit {
      */
     public static void cancel(String url) {
         if (!url.contains("http://") && !url.contains("https://")) {
-            String baseUrl = AppConfigInIt.getConfiguration(AppConfigType.HTTP_BASE_API);
+            String baseUrl = ((HttpConfig)AppConfigInIt.getConfiguration(AppConfigType.HTTP_CONFIG)).getHTTP_BASE_API();
             url = baseUrl + url;
         }
         Dispatcher dispatcher = MiOkHttpClient.getOkHttpClient().dispatcher();

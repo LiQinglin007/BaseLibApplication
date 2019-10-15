@@ -3,7 +3,7 @@ package com.lixiaomi.baselibapplication.http;
 import com.google.gson.Gson;
 import com.lixiaomi.baselib.config.AppConfigInIt;
 import com.lixiaomi.baselib.config.AppConfigType;
-import com.lixiaomi.baselib.net.MiHttpData;
+import com.lixiaomi.baselib.net.HttpConfig;
 import com.lixiaomi.baselib.net.okhttp.MiSendRequestOkHttp;
 import com.lixiaomi.baselib.utils.LogUtils;
 import com.lixiaomi.baselib.utils.PreferenceUtils;
@@ -12,11 +12,8 @@ import com.lixiaomi.baselibapplication.bean.SendLogin;
 
 import java.io.IOException;
 
-import okhttp3.Call;
 import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -71,7 +68,7 @@ public class TokenInterceptor implements Interceptor {
      */
     private String getNewToken() {
         try {
-            String baseUrl = AppConfigInIt.getConfiguration(AppConfigType.HTTP_BASE_API);
+            String baseUrl =((HttpConfig) AppConfigInIt.getConfiguration(AppConfigType.HTTP_CONFIG)).getHTTP_BASE_API();
             Response response = MiSendRequestOkHttp.sendPostSync(null, new SendLogin("admin", "123456", 1), baseUrl + "user/login", 0);
             String result = response.body().string();
             LoginBean loginBean = new Gson().fromJson(result, LoginBean.class);

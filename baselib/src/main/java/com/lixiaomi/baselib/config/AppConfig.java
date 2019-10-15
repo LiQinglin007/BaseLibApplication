@@ -2,11 +2,9 @@ package com.lixiaomi.baselib.config;
 
 import android.content.SharedPreferences;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.lixiaomi.baselib.net.HttpConfig;
 
-import okhttp3.Interceptor;
+import java.util.HashMap;
 
 
 /**
@@ -22,15 +20,6 @@ public final class AppConfig {
      * 键值对集合
      */
     public final static HashMap<Object, Object> APP_CONFIGS = new HashMap<>();
-
-    /**
-     * okhttp的拦截器集合
-     */
-    private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
-    /**
-     * 网络拦截器
-     */
-    private static final ArrayList<Interceptor> NETWORK_INTERCEPTORS = new ArrayList<>();
 
     public static AppConfig getInstance() {
         return SingletonHolder.INSTANCE;
@@ -71,79 +60,91 @@ public final class AppConfig {
     }
 
     /**
-     * 配置okhttp网络拦截器
+     * 配置网络请求参数
      *
-     * @param interceptor
+     * @param httpConfig
      * @return
      */
-    public final AppConfig withHttpNetWorkInterceptors(Interceptor interceptor) {
-        NETWORK_INTERCEPTORS.add(interceptor);
-        APP_CONFIGS.put(AppConfigType.HTTP_NETWORK_INTERCEPTOR, NETWORK_INTERCEPTORS);
+    public final AppConfig withHttpConfig(HttpConfig httpConfig) {
+        APP_CONFIGS.put(AppConfigType.HTTP_CONFIG, httpConfig);
         return this;
     }
 
 
-    /**
-     * 配置okhttp应用拦截器
-     *
-     * @param interceptor
-     * @return
-     */
-    public final AppConfig withHttpInterceptors(Interceptor interceptor) {
-        INTERCEPTORS.add(interceptor);
-        APP_CONFIGS.put(AppConfigType.HTTP_INTERCEPTOR, INTERCEPTORS);
-        return this;
-    }
-
-
-    /**
-     * 配置okhttp应用拦截器
-     *
-     * @param interceptorList
-     * @return
-     */
-    public final AppConfig withHttpInterceptors(ArrayList<Interceptor> interceptorList) {
-        INTERCEPTORS.addAll(interceptorList);
-        APP_CONFIGS.put(AppConfigType.HTTP_INTERCEPTOR, INTERCEPTORS);
-        return this;
-    }
-
-
-    /**
-     * 配置是否信任所有证书,用于https请求，如果不信任，请构建自己服务器的公钥传递进来
-     *
-     * @param certificateFlag
-     * @param inputStream     不信任所有证书，传递自己服务器的公钥进来.cer文件
-     * @return
-     */
-    public final AppConfig withHttpCertificateFlag(boolean certificateFlag, InputStream inputStream) {
-        APP_CONFIGS.put(AppConfigType.HTTP_CERTIFICATE_FLAG, certificateFlag);
-        APP_CONFIGS.put(AppConfigType.HTTP_CERTIFICATE_INPUT, inputStream);
-        return this;
-    }
-
-    /**
-     * 链接失败后是否重试去链接
-     *
-     * @param retryConnection 默认为true:重试链接
-     * @return
-     */
-    public final AppConfig withHttpRetryConnection(boolean retryConnection) {
-        APP_CONFIGS.put(AppConfigType.HTTP_RETRY_CONNECTION, retryConnection);
-        return this;
-    }
-
-
-    /**
-     * 配置网络请求主机地址
-     *
-     * @param baseUrl 如使用retrofit,需以"/"结尾
-     * @return
-     */
-    public final AppConfig withBaseUrl(String baseUrl) {
-        APP_CONFIGS.put(AppConfigType.HTTP_BASE_API, baseUrl);
-        return this;
-    }
+//    /**
+//     * 配置okhttp网络拦截器
+//     *
+//     * @param interceptor
+//     * @return
+//     */
+//    public final AppConfig withHttpNetWorkInterceptors(Interceptor interceptor) {
+//        NETWORK_INTERCEPTORS.add(interceptor);
+//        APP_CONFIGS.put(AppConfigType._HTTP_NETWORK_INTERCEPTOR, NETWORK_INTERCEPTORS);
+//        return this;
+//    }
+//
+//
+//    /**
+//     * 配置okhttp应用拦截器
+//     *
+//     * @param interceptor
+//     * @return
+//     */
+//    public final AppConfig withHttpInterceptors(Interceptor interceptor) {
+//        INTERCEPTORS.add(interceptor);
+//        APP_CONFIGS.put(AppConfigType._HTTP_INTERCEPTOR, INTERCEPTORS);
+//        return this;
+//    }
+//
+//
+//    /**
+//     * 配置okhttp应用拦截器
+//     *
+//     * @param interceptorList
+//     * @return
+//     */
+//    public final AppConfig withHttpInterceptors(ArrayList<Interceptor> interceptorList) {
+//        INTERCEPTORS.addAll(interceptorList);
+//        APP_CONFIGS.put(AppConfigType._HTTP_INTERCEPTOR, INTERCEPTORS);
+//        return this;
+//    }
+//
+//
+//    /**
+//     * 配置是否信任所有证书,用于https请求，如果不信任，请构建自己服务器的公钥传递进来
+//     *
+//     * @param certificateFlag
+//     * @param inputStream     不信任所有证书，传递自己服务器的公钥进来.cer文件
+//     * @return
+//     */
+//    public final AppConfig withHttpCertificateFlag(boolean certificateFlag, InputStream inputStream) {
+//        APP_CONFIGS.put(AppConfigType._HTTP_CERTIFICATE_FLAG, certificateFlag);
+//        APP_CONFIGS.put(AppConfigType._HTTP_CERTIFICATE_INPUT, inputStream);
+//        return this;
+//    }
+//
+//    /**
+//     * 链接失败后是否重试去链接
+//     *
+//     * @param retryConnection 默认为true:重试链接
+//     * @return
+//     */
+//    public final AppConfig withHttpRetryConnection(boolean retryConnection) {
+//        APP_CONFIGS.put(AppConfigType._HTTP_RETRY_CONNECTION, retryConnection);
+//        return this;
+//    }
+//
+//
+//    /**
+//     * 配置网络请求主机地址
+//     *
+//     * @param baseUrl 如使用retrofit,需以"/"结尾
+//     * @return
+//     */
+//    public final AppConfig withBaseUrl(String baseUrl) {
+//        APP_CONFIGS.put(AppConfigType._HTTP_BASE_API, baseUrl);
+//        return this;
+//    }
 
     /**
      * 是否为调试状态

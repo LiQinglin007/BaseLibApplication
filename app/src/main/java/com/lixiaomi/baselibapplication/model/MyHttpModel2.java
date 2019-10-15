@@ -1,13 +1,12 @@
 package com.lixiaomi.baselibapplication.model;
 
-import com.google.gson.Gson;
-import com.lixiaomi.baselib.net.okhttp.MiOkHttpCallBack;
 import com.lixiaomi.baselib.net.okhttp.MiSendRequestOkHttp;
 import com.lixiaomi.baselib.utils.LogUtils;
-import com.lixiaomi.baselibapplication.bean.SendUserLoginBean;
 import com.lixiaomi.baselibapplication.http.HttpUtils;
-import com.lixiaomi.baselibapplication.utils.aes_rsa_utils.AESUtil;
-import com.lixiaomi.mvplib.base.MyPresenterCallBack;
+import com.lixiaomi.mvplib.base.BasePresenterCallBack;
+import com.lixiaomi.mvplib.base.MiHttpCallBack;
+
+import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -20,25 +19,14 @@ import com.lixiaomi.mvplib.base.MyPresenterCallBack;
 public class MyHttpModel2 implements IMyHttpModel2 {
 
     @Override
-    public void login(final MyPresenterCallBack myPresenterCallBack) {
-        String sendJson = new Gson().toJson(new SendUserLoginBean("15284224244", "1234567", "7741128"));
+    public void login(final BasePresenterCallBack myPresenterCallBack) {
         final String mAesPassword = HttpUtils.getAESPassword();
-        LogUtils.loge("加密前请求参数:" + sendJson);
-        LogUtils.loge("mAesPassword:" + mAesPassword);
-        MiSendRequestOkHttp.sendPost(HttpUtils.getHeads(mAesPassword), AESUtil.encrypt(sendJson, mAesPassword), "http://hz.zhcun.cn:/api/ApiUser/Login", 0, new MiOkHttpCallBack() {
+        MiSendRequestOkHttp.sendGet(HttpUtils.getHeads(mAesPassword),null, "https://www.baidu.com", 0, new MiHttpCallBack(myPresenterCallBack) {
             @Override
-            public void onSuccess(int code, String response) {
-                LogUtils.loge("解密前：response:" + response);
-                String s = AESUtil.desEncrypt(response, mAesPassword);
-                LogUtils.loge("URL:http://hz.zhcun.cn:/api/ApiUser/Login" + "code:" + code + " response:" + s);
-                myPresenterCallBack.success(code, s);
-            }
-
-            @Override
-            public void onFailure(Throwable e) {
-                myPresenterCallBack.failure(e);
+            public void onSuccess(@NotNull String response) {
+                LogUtils.loge("URL:http://hz.zhcun.cn:/api/ApiUser/Login" + " response:" + response);
+                myPresenterCallBack.success(response);
             }
         });
-
     }
 }

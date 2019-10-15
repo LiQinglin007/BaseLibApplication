@@ -15,6 +15,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.lixiaomi.baselib.R;
 import com.lixiaomi.baselib.config.AppConfigInIt;
 import com.lixiaomi.baselib.config.AppConfigType;
+import com.lixiaomi.baselib.net.HttpConfig;
 
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class MiLoadImageUtil {
         if (url.contains("http://") || url.contains("https://")) {
             return url;
         } else {
-            return (String) AppConfigInIt.getConfiguration(AppConfigType.HTTP_BASE_API) + url;
+            return ((HttpConfig) AppConfigInIt.getConfiguration(AppConfigType.HTTP_CONFIG)).getHTTP_BASE_API() + url;
         }
     }
 

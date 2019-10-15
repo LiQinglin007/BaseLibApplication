@@ -2,9 +2,12 @@ package com.lixiaomi.baselib.net.okhttp;
 
 import com.lixiaomi.baselib.config.AppConfigInIt;
 import com.lixiaomi.baselib.config.AppConfigType;
-import com.lixiaomi.baselib.net.MiHttpData;
+import com.lixiaomi.baselib.net.HttpConfig;
+import com.lixiaomi.baselib.net.MiHttpMediaType;
 import com.lixiaomi.baselib.utils.LogUtils;
 import com.lixiaomi.baselib.utils.MiJsonUtil;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -92,7 +95,7 @@ public final class MiSendRequestOkHttp {
     public static Response sendPostSync(WeakHashMap<String, String> heads, Object mSendBean, String url, int cacheTime) throws IOException {
         //创建json请求体
         if (null != mSendBean) {
-            RequestBody jsonBody = RequestBody.create(MiHttpData.MEDIA_TYPE_JSON, MiJsonUtil.getJson(mSendBean));
+            RequestBody jsonBody = RequestBody.create(MiHttpMediaType.MEDIA_TYPE_JSON, MiJsonUtil.getJson(mSendBean));
             LogUtils.logd(TAG, "请求参数:" + MiJsonUtil.getJson(mSendBean));
             return okhttpSendSync(heads, jsonBody, url, cacheTime);
         } else {
@@ -110,7 +113,7 @@ public final class MiSendRequestOkHttp {
      */
     public static Response sendPostSync(WeakHashMap<String, String> heads, String mSendJson, String url, int cacheTime) throws IOException {
         //创建json请求体
-        RequestBody jsonBody = RequestBody.create(MiHttpData.MEDIA_TYPE_JSON, mSendJson);
+        RequestBody jsonBody = RequestBody.create(MiHttpMediaType.MEDIA_TYPE_JSON, mSendJson);
         LogUtils.logd(TAG, "请求参数:" + mSendJson);
         return okhttpSendSync(heads, jsonBody, url, cacheTime);
     }
@@ -125,18 +128,7 @@ public final class MiSendRequestOkHttp {
      * @param cacheTime   缓存时间(s)
      */
     private static Response okhttpSendSync(WeakHashMap<String, String> heads, RequestBody requestBody, String url, int cacheTime) throws IOException {
-        //如果请求地址中包含“http://” 或者“ https://” 就认位是一个完整的请求地址，这里就不进行拼接了
-        //不是完整的请求地址，就用BaseUrl去拼接一下
-        if (!url.contains("http://") && !url.contains("https://")) {
-            try {
-                String baseUrl = AppConfigInIt.getConfiguration(AppConfigType.HTTP_BASE_API);
-                url = baseUrl + url;
-            } catch (NullPointerException e) {
-                LogUtils.loge("BaseUrl不能为NULL,请先在Application中配置BaseUrl.");
-            }
-        }
-        LogUtils.logd(TAG, "请求头：" + MiJsonUtil.getJson(heads));
-        LogUtils.logd(TAG, "完整的url:" + url);
+        url = getUrl(url);
         Request.Builder requestBuilder = new Request.Builder();
         if (heads != null && heads.size() != 0) {
             for (WeakHashMap.Entry<String, String> map : heads.entrySet()) {
@@ -175,7 +167,7 @@ public final class MiSendRequestOkHttp {
      * @param cacheTime  缓存时间(s)
      * @param myCallBack 回调
      */
-    public static void sendGet(WeakHashMap<String, String> heads, WeakHashMap<String, Object> params, String url, int cacheTime, MiOkHttpCallBack myCallBack) {
+    public static void sendGet(WeakHashMap<String, String> heads, WeakHashMap<String, Object> params, String url, int cacheTime, BaseOkHttpCallBack myCallBack) {
         StringBuilder sendUrl = new StringBuilder(url);
         String substring = sendUrl.substring(sendUrl.length() - 1, sendUrl.length());
         //判断传进来的url最后一位是不是？
@@ -205,13 +197,13 @@ public final class MiSendRequestOkHttp {
      * @param myCallBack 请求回调
      */
     public static void sendPost(WeakHashMap<String, String> heads, WeakHashMap<String, String> params, WeakHashMap<String, File> fileList,
-                                String url, MiOkHttpCallBack myCallBack) {
+                                String url, BaseOkHttpCallBack myCallBack) {
         MultipartBody.Builder multipartBody = new MultipartBody.Builder();
         multipartBody.setType(MultipartBody.FORM);
         if (fileList != null && fileList.size() != 0) {
             for (WeakHashMap.Entry<String, File> map : fileList.entrySet()) {
                 //web端的表单域；图片名称；图片的RequestBody
-                multipartBody.addFormDataPart("mFile", map.getKey(), RequestBody.create(MiHttpData.MEDIA_TYPE_PNG, map.getValue()));
+                multipartBody.addFormDataPart("mFile", map.getKey(), RequestBody.create(MiHttpMediaType.MEDIA_TYPE_PNG, map.getValue()));
             }
         }
         if (params != null && params.size() != 0) {
@@ -233,7 +225,7 @@ public final class MiSendRequestOkHttp {
      * @param cacheTime  缓存时间(s)
      * @param myCallBack 回调
      */
-    public static void sendPost(WeakHashMap<String, String> heads, WeakHashMap<String, String> params, String url, int cacheTime, MiOkHttpCallBack myCallBack) {
+    public static void sendPost(WeakHashMap<String, String> heads, WeakHashMap<String, String> params, String url, int cacheTime, BaseOkHttpCallBack myCallBack) {
         FormBody.Builder formBodyBuilder = new FormBody.Builder();
         if (params != null && params.size() != 0) {
             for (WeakHashMap.Entry<String, String> map : params.entrySet()) {
@@ -254,10 +246,10 @@ public final class MiSendRequestOkHttp {
      * @param cacheTime   缓存时间(s)
      * @param mOkCallBack 回调
      */
-    public static void sendPost(WeakHashMap<String, String> heads, Object mSendBean, String url, int cacheTime, MiOkHttpCallBack mOkCallBack) {
+    public static void sendPost(WeakHashMap<String, String> heads, Object mSendBean, String url, int cacheTime, BaseOkHttpCallBack mOkCallBack) {
         //创建json请求体
         if (null != mSendBean) {
-            RequestBody jsonBody = RequestBody.create(MiHttpData.MEDIA_TYPE_JSON, MiJsonUtil.getJson(mSendBean));
+            RequestBody jsonBody = RequestBody.create(MiHttpMediaType.MEDIA_TYPE_JSON, MiJsonUtil.getJson(mSendBean));
             LogUtils.logd(TAG, "请求参数:" + MiJsonUtil.getJson(mSendBean));
             okhttpSend(heads, jsonBody, url, cacheTime, mOkCallBack);
         } else {
@@ -274,9 +266,9 @@ public final class MiSendRequestOkHttp {
      * @param cacheTime   缓存时间(s)
      * @param mOkCallBack 回调
      */
-    public static void sendPost(WeakHashMap<String, String> heads, String mSendJson, String url, int cacheTime, MiOkHttpCallBack mOkCallBack) {
+    public static void sendPost(WeakHashMap<String, String> heads, String mSendJson, String url, int cacheTime, BaseOkHttpCallBack mOkCallBack) {
         //创建json请求体
-        RequestBody jsonBody = RequestBody.create(MiHttpData.MEDIA_TYPE_JSON, mSendJson);
+        RequestBody jsonBody = RequestBody.create(MiHttpMediaType.MEDIA_TYPE_JSON, mSendJson);
         LogUtils.logd(TAG, "请求参数:" + mSendJson);
         okhttpSend(heads, jsonBody, url, cacheTime, mOkCallBack);
     }
@@ -291,19 +283,9 @@ public final class MiSendRequestOkHttp {
      * @param cacheTime   缓存时间(s)
      * @param myCallBack  回调
      */
-    private static void okhttpSend(WeakHashMap<String, String> heads, RequestBody requestBody, String url, int cacheTime, MiOkHttpCallBack myCallBack) {
-        //如果请求地址中包含“http://” 或者“ https://” 就认位是一个完整的请求地址，这里就不进行拼接了
-        //不是完整的请求地址，就用BaseUrl去拼接一下
-        if (!url.contains("http://") && !url.contains("https://")) {
-            try {
-                String baseUrl = AppConfigInIt.getConfiguration(AppConfigType.HTTP_BASE_API);
-                url = baseUrl + url;
-            } catch (NullPointerException e) {
-                LogUtils.loge("BaseUrl不能为NULL,请先在Application中配置BaseUrl.");
-            }
-        }
+    private static void okhttpSend(WeakHashMap<String, String> heads, RequestBody requestBody, String url, int cacheTime, BaseOkHttpCallBack myCallBack) {
+        url = getUrl(url);
         LogUtils.logd(TAG, "请求头：" + MiJsonUtil.getJson(heads));
-        LogUtils.logd(TAG, "完整的url:" + url);
         Request.Builder requestBuilder = new Request.Builder();
         if (heads != null && heads.size() != 0) {
             for (WeakHashMap.Entry<String, String> map : heads.entrySet()) {
@@ -336,21 +318,28 @@ public final class MiSendRequestOkHttp {
      * @param url 请求地址当作tag
      */
     public static void cancel(String url) {
+        url = getUrl(url);
+        Dispatcher dispatcher = MiOkHttpClient.getOkHttpClient().dispatcher();
+        for (Call call : dispatcher.runningCalls()) {
+            String tag = (String) call.request().tag();
+            if (url.equals(tag)) {
+                call.cancel();
+                LogUtils.loge("取消请求：" + tag);
+            }
+        }
+    }
+
+    @NotNull
+    private static String getUrl(String url) {
         try {
             if (!url.contains("http://") && !url.contains("https://")) {
-                String baseUrl = AppConfigInIt.getConfiguration(AppConfigType.HTTP_BASE_API);
+                String baseUrl = ((HttpConfig) AppConfigInIt.getConfiguration(AppConfigType.HTTP_CONFIG)).getHTTP_BASE_API();
                 url = baseUrl + url;
             }
-            Dispatcher dispatcher = MiOkHttpClient.getOkHttpClient().dispatcher();
-            for (Call call : dispatcher.runningCalls()) {
-                String tag = (String) call.request().tag();
-                if (url.equals(tag)) {
-                    call.cancel();
-                    LogUtils.loge("取消请求：" + tag);
-                }
-            }
+            LogUtils.logd(TAG, "完整的url:" + url);
         } catch (NullPointerException e) {
             LogUtils.loge("BaseUrl不能为NULL,请先在Application中配置BaseUrl.");
         }
+        return url;
     }
 }

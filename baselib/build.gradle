@@ -1,12 +1,16 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
 android {
     compileSdkVersion 28
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 5
-        versionName "1.0.5"
+        versionCode 6
+        versionName "1.0.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -57,6 +61,7 @@ dependencies {
     api "com.android.support:appcompat-v7:$support_v7"
     api "com.android.support:design:$support_design"
     api "com.android.support:cardview-v7:$support_cardview"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     //分包
     api "com.android.support:multidex:$multidex"
     api "com.android.support.constraint:constraint-layout:$constraint_layout"
@@ -138,6 +143,12 @@ install {
                         groupId "com.android.support"
                         artifactId "support-v4"
                         version "$support_v4"
+                    }
+
+                    dependency {
+                        groupId "org.jetbrains.kotlin"
+                        artifactId "kotlin-stdlib-jdk8"
+                        version "$kotlin_version"
                     }
                     dependency {
                         groupId "com.android.support"
@@ -302,7 +313,7 @@ artifacts {
 //发布到组织名称名字，必须填写
 group = "com.lixiaomi"//groupId
 // 版本号，下次更新是只需要更改版本号即可
-version = "1.0.6"
+version = "1.0.7"
 
 //上传到jcenter
 Properties properties = new Properties()

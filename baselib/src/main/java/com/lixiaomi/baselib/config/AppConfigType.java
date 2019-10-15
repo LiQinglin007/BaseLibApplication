@@ -25,29 +25,9 @@ public enum AppConfigType {
      */
     CONFIGREADY,
     /**
-     * okhttp的拦截器
+     * 网络请求配置
      */
-    HTTP_INTERCEPTOR,
-    /**
-     * 网络拦截器
-     */
-    HTTP_NETWORK_INTERCEPTOR,
-    /**
-     * 是否信任所有证书
-     */
-    HTTP_CERTIFICATE_FLAG,
-    /**
-     * 证书流
-     */
-    HTTP_CERTIFICATE_INPUT,
-    /**
-     * 链接失败后是否重试
-     */
-    HTTP_RETRY_CONNECTION,
-    /**
-     * 请求框架，配置的BaseUrl
-     */
-    HTTP_BASE_API,
+    HTTP_CONFIG,
     /**
      * 是否为调试模式
      */
