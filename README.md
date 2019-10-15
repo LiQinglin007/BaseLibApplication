@@ -12,7 +12,7 @@ allprojects {
 ```
 ### 2、添加依赖和配置
 ```
-api 'com.lixiaomi:baselib:1.0.3'
+api 'com.lixiaomi:baselib:1.0.7'
 ```
 ### 3、相关权限
 ```
